@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.text.SimpleDateFormat;
 
 @Entity
 @Builder
@@ -23,4 +24,6 @@ public class Plane {
     private String number;
     private String companyName;
     private Integer capacity;
+
+
 }

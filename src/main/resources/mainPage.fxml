@@ -2,12 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPageControllers">
    <children>
-      <ListView fx:id="scheduleList" layoutX="7.0" layoutY="74.0" prefHeight="312.0" prefWidth="581.0" />
       <Button fx:id="deleteMainPage" layoutX="433.0" layoutY="38.0" mnemonicParsing="false" text="Delete" />
       <Button fx:id="orderMainPage" layoutX="508.0" layoutY="38.0" mnemonicParsing="false" text="Order" />
       <Button fx:id="myOrdersMainPage" layoutX="37.0" layoutY="14.0" mnemonicParsing="false" text="My Orders" />
@@ -15,5 +15,15 @@
       <Button fx:id="planesMainPage" layoutX="275.0" layoutY="12.0" mnemonicParsing="false" text="Planes" />
       <Button disable="true" layoutX="133.0" layoutY="12.0" mnemonicParsing="false" text="Schedule" />
       <Label fx:id="nameLabel" layoutX="14.0" layoutY="54.0" prefHeight="18.0" prefWidth="148.0" />
+      <TableView fx:id="tableMainPage" layoutX="37.0" layoutY="77.0" prefHeight="266.0" prefWidth="554.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="43.20001220703125" text="ID" />
+          <TableColumn fx:id="dateColumn" prefWidth="84.0" text="Date" />
+            <TableColumn fx:id="fromColumn" prefWidth="94.39996337890625" text="From" />
+            <TableColumn fx:id="toColumn" prefWidth="107.20001220703125" text="To" />
+            <TableColumn fx:id="planeNumberColumn" prefWidth="104.0" text="Plane Number" />
+            <TableColumn fx:id="companyColumn" prefWidth="120.00006103515625" text="Company" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

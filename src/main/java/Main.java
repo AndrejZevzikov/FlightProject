@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import repositories.FlightScheduleRepository;
 import repositories.PlaneRepository;
 import services.FlightScheduleServices;
+import utils.HibernateUtils;
 
 
 import java.io.IOException;
@@ -23,19 +24,21 @@ import java.util.List;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 
 
         Parent root = FXMLLoader.load(getClass().getResource(Pages.LOGIN));
         primaryStage.setTitle("Best Program Ever");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.sizeToScene();
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }
 
 
     public static void main(String[] args) throws IOException {
+
         launch(args);
     }
 }

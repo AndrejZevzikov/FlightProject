@@ -1,18 +1,25 @@
 package controllers;
 
 import entities.FlightSchedule;
+import entities.Plane;
 import entities.User;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import repositories.FlightScheduleRepository;
 import services.FlightScheduleServices;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -23,6 +30,20 @@ public class MainPageControllers implements Initializable {
     public Button showFlights;
     @FXML
     public Label nameLabel;
+    @FXML
+    public TableColumn<FlightSchedule,Long> idColumn;
+    @FXML
+    public TableColumn<FlightSchedule,String> dateColumn;
+    @FXML
+    public TableColumn<FlightSchedule,String> fromColumn;
+    @FXML
+    public TableColumn<FlightSchedule,String> toColumn;
+    @FXML
+    public TableColumn<FlightSchedule,String> planeNumberColumn;
+    @FXML
+    public TableColumn<FlightSchedule,String> companyColumn;
+    @FXML
+    public TableView<FlightSchedule> tableMainPage;
     @FXML
     private Button myOrdersMainPage;
     @FXML
@@ -37,16 +58,21 @@ public class MainPageControllers implements Initializable {
     private Button orderMainPage;
 
     protected User user;
+    ObservableList<FlightSchedule> flights;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         FlightScheduleRepository flightScheduleRepository = new FlightScheduleRepository();
+        flights = FXCollections.observableArrayList(flightScheduleRepository.findAll());
+        idColumn.setCellValueFactory(new PropertyValueFactory<FlightSchedule, Long>("id"));
+        fromColumn.setCellValueFactory(new PropertyValueFactory<FlightSchedule, String>("locationFrom"));
+        toColumn.setCellValueFactory(new PropertyValueFactory<FlightSchedule, String>("locationTo"));
+        planeNumberColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlane().getNumber()));
+        companyColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlane().getCompanyName()));
+        dateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFlightDateToString()));
 
-        List<String> flightsToString = flightScheduleRepository.findAll().stream()
-                .map(FlightSchedule::toString)
-                .collect(Collectors.toList());
-        scheduleList.getItems().addAll(flightsToString);
+        tableMainPage.setItems(flights);
     }
 
     public void setUser(User user) {
@@ -54,7 +80,7 @@ public class MainPageControllers implements Initializable {
         nameLabel.setText("Hi, " + user.getUserName());
     }
 
-    public void addFlightsScheduleFromFile(String path){
+    public void addFlightsScheduleFromFile(String path) {
         FlightScheduleServices flightScheduleServices = new FlightScheduleServices();
         FlightScheduleRepository flightScheduleRepository = new FlightScheduleRepository();
         try {

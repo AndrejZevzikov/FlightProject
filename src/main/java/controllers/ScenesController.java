@@ -32,6 +32,8 @@ public class ScenesController {
         MainPageControllers mainPageControllers = loader.getController();
         mainPageControllers.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setMinWidth(800);
+        stage.setMaxHeight(600);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

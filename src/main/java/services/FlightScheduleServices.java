@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class FlightScheduleServices {
+public class  FlightScheduleServices {
 
     private FlightScheduleRepository flightScheduleRepository;
 
@@ -23,6 +23,7 @@ public class FlightScheduleServices {
     public List<FlightSchedule> getFlightsFromFile(String path) throws IOException {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get(path));
+
         return gson.fromJson(reader, new TypeToken<List<FlightSchedule>>() {}.getType());
 
     }

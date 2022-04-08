@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -25,6 +26,14 @@ public class FlightSchedule {
     @JoinColumn(name = "plane_id")
     private Plane plane;
     private Date flightTime;
+
+    public String getFlightDateToString(){
+        if (flightTime == null){
+            return "";
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        return formatter.format(flightTime);
+    }
 
     @Override
     public String toString() {
