@@ -10,6 +10,8 @@ import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
+
 @Entity
 @Data
 @Builder
@@ -22,7 +24,7 @@ public class FlightSchedule {
     private String locationFrom;
     private String locationTo;
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @Cascade(SAVE_UPDATE)
     @JoinColumn(name = "plane_id")
     private Plane plane;
     private Date flightTime;

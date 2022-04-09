@@ -7,9 +7,7 @@ import utils.HibernateUtils;
 
 import java.util.List;
 
-
 public class UserRepository implements Crud<User> {
-
 
     @Override
     public List<User> findAll() {
@@ -26,5 +24,4 @@ public class UserRepository implements Crud<User> {
         session.close();
         return user;
     }
-
 }

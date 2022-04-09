@@ -21,7 +21,7 @@ public class ScenesController {
     public void changeSceneByGivenPageNonReg(ActionEvent event, String page) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(page));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root,stage.getWidth(),stage.getHeight());
+        scene = new Scene(root, stage.getWidth(), stage.getHeight());
         stage.setScene(scene);
         stage.show();
 
@@ -33,7 +33,7 @@ public class ScenesController {
         MainPageControllers mainPageControllers = loader.getController();
         mainPageControllers.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root,stage.getWidth(),stage.getHeight());
+        scene = new Scene(root, stage.getWidth(), stage.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -44,7 +44,19 @@ public class ScenesController {
         UsersController usersController = loader.getController();
         usersController.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root,stage.getWidth(),stage.getHeight());
+        scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.show();
+    }
+
+    public void changeSceneToPlanesPage(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Pages.PLANES_PAGE));
+        root = loader.load();
+        PlanesController planesController = loader.getController();
+        planesController.setUser(user);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root, stage.getWidth(), stage.getHeight());
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();

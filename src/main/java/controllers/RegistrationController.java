@@ -8,10 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import repositories.UserRepository;
+import services.UserValidationService;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 
 public class RegistrationController {
     @FXML
@@ -26,36 +25,33 @@ public class RegistrationController {
     private Label registrationLabel;
 
     private ScenesController scenesController = new ScenesController();
+    private UserRepository userRepository = new UserRepository();
+    private UserValidationService userValidationService = new UserValidationService();
 
     public void confirmRegistration(ActionEvent event) throws IOException {
-        String username = usernameReg.getText();
-        String email = emailReg.getText();
-        String password = passwordReg.getText();
-        UserRepository userRepository = new UserRepository();
 
-        List<User> allUsersInDB = userRepository.findAll();
+       if(userValidationService.isUserInputValid(createUserFromInput(),registrationLabel)) {
+           saveAndLogin(event);
+       }
+    }
 
-        Optional<User> invalidUsername = allUsersInDB.stream()
-                .filter(user -> user.getUserName().equals(username))
-                .findAny();
-        Optional<User> invalidEmail = allUsersInDB.stream()
-                .filter(user -> user.getEmail().equals(email))
-                .findAny();
+    private User createUserFromInput(){
+        return User.builder()
+                .userName(usernameReg.getText())
+                .password(passwordReg.getText())
+                .email(emailReg.getText())
+                .build();
+    }
 
-        if (password.isEmpty() || username.isEmpty() || email.isEmpty()) {
-            registrationLabel.setText("Some fields, empty");
-        } else if (invalidUsername.isPresent()) {
-            registrationLabel.setText("username already exists");
-        } else if (invalidEmail.isPresent()) {
-            registrationLabel.setText("email already exists");
-        } else {
-            userRepository.saveOrUpdate(
-                    User.builder()
-                            .userName(username)
-                            .password(password)
-                            .email(email).build());
 
-            scenesController.changeSceneByGivenPageNonReg(event, Pages.LOGIN);
-        }
+    private void saveAndLogin(ActionEvent event) throws IOException {
+        userRepository.saveOrUpdate(
+                User.builder()
+                        .userName(usernameReg.getText())
+                        .password(passwordReg.getText())
+                        .email(emailReg.getText())
+                        .build());
+
+        scenesController.changeSceneByGivenPageNonReg(event, Pages.LOGIN);
     }
 }

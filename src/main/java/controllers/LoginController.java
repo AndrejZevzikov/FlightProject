@@ -28,11 +28,11 @@ public class LoginController {
     private Button registrationButton;
 
     private ScenesController scenesController = new ScenesController();
+    private UserRepository userRepository = new UserRepository();
 
 
     public void login(ActionEvent event) throws IOException {
         String userName = usernameText.getText();
-        UserRepository userRepository = new UserRepository();
         List<User> users = userRepository.findAll();
         Optional<User> userToValid = users.stream()
                 .filter(user -> user.getUserName().equals(userName))

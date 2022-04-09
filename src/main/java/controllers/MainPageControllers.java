@@ -26,8 +26,6 @@ import java.util.ResourceBundle;
 public class MainPageControllers implements Initializable {
 
     @FXML
-    public Button showFlights;
-    @FXML
     public Label nameLabel;
     @FXML
     public TableColumn<FlightSchedule, Long> idColumn;
@@ -125,5 +123,9 @@ public class MainPageControllers implements Initializable {
 
     public void onUsersButton(ActionEvent event) throws IOException {
         scenesController.changeSceneToUsersPage(event, user);
+    }
+
+    public void onPlanesButton(ActionEvent event) throws IOException {
+        scenesController.changeSceneToPlanesPage(event,user);
     }
 }
