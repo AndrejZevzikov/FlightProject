@@ -27,7 +27,7 @@ public class RegistrationController {
 
     private ScenesController scenesController = new ScenesController();
 
-    public void confirmRegistration(ActionEvent event) throws InterruptedException, IOException {
+    public void confirmRegistration(ActionEvent event) throws IOException {
         String username = usernameReg.getText();
         String email = emailReg.getText();
         String password = passwordReg.getText();
@@ -54,6 +54,7 @@ public class RegistrationController {
                             .userName(username)
                             .password(password)
                             .email(email).build());
+
             scenesController.changeSceneByGivenPageNonReg(event, Pages.LOGIN);
         }
     }

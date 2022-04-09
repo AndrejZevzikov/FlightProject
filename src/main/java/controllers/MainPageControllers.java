@@ -1,28 +1,27 @@
 package controllers;
 
+import constants.Pages;
+import entities.FlightOrder;
 import entities.FlightSchedule;
-import entities.Plane;
 import entities.User;
-import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import repositories.FlightOrderRepository;
 import repositories.FlightScheduleRepository;
 import services.FlightScheduleServices;
 
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class MainPageControllers implements Initializable {
 
@@ -31,19 +30,25 @@ public class MainPageControllers implements Initializable {
     @FXML
     public Label nameLabel;
     @FXML
-    public TableColumn<FlightSchedule,Long> idColumn;
+    public TableColumn<FlightSchedule, Long> idColumn;
     @FXML
-    public TableColumn<FlightSchedule,String> dateColumn;
+    public TableColumn<FlightSchedule, String> dateColumn;
     @FXML
-    public TableColumn<FlightSchedule,String> fromColumn;
+    public TableColumn<FlightSchedule, String> fromColumn;
     @FXML
-    public TableColumn<FlightSchedule,String> toColumn;
+    public TableColumn<FlightSchedule, String> toColumn;
     @FXML
-    public TableColumn<FlightSchedule,String> planeNumberColumn;
+    public TableColumn<FlightSchedule, String> planeNumberColumn;
     @FXML
-    public TableColumn<FlightSchedule,String> companyColumn;
+    public TableColumn<FlightSchedule, String> companyColumn;
     @FXML
     public TableView<FlightSchedule> tableMainPage;
+    @FXML
+    public TableColumn<FlightSchedule, Boolean> checkBox;
+    @FXML
+    public Button confirmOrder;
+    @FXML
+    public Label countLabel;
     @FXML
     private Button myOrdersMainPage;
     @FXML
@@ -59,11 +64,14 @@ public class MainPageControllers implements Initializable {
 
     protected User user;
     ObservableList<FlightSchedule> flights;
+    private List<FlightSchedule> buckedFlights = new ArrayList<>();
+    private int count;
+    private FlightScheduleRepository flightScheduleRepository = new FlightScheduleRepository();
+    private ScenesController scenesController = new ScenesController();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        FlightScheduleRepository flightScheduleRepository = new FlightScheduleRepository();
         flights = FXCollections.observableArrayList(flightScheduleRepository.findAll());
         idColumn.setCellValueFactory(new PropertyValueFactory<FlightSchedule, Long>("id"));
         fromColumn.setCellValueFactory(new PropertyValueFactory<FlightSchedule, String>("locationFrom"));
@@ -80,9 +88,26 @@ public class MainPageControllers implements Initializable {
         nameLabel.setText("Hi, " + user.getUserName());
     }
 
+    public void insertFlightInBucket(ActionEvent event) {
+        FlightSchedule orderedFlight = tableMainPage.getSelectionModel().getSelectedItem();
+        buckedFlights.add(orderedFlight);
+        count += 1;
+        countLabel.setText(String.valueOf(count));
+    }
+
+    public void confirmOrder(ActionEvent event) {
+        FlightOrder order = FlightOrder.builder()
+                .flights(buckedFlights)
+                .user(user)
+                .build();
+        FlightOrderRepository flightOrderRepository = new FlightOrderRepository();
+        flightOrderRepository.saveOrUpdate(order);
+        count = 0;
+        countLabel.setText("");
+    }
+
     public void addFlightsScheduleFromFile(String path) {
         FlightScheduleServices flightScheduleServices = new FlightScheduleServices();
-        FlightScheduleRepository flightScheduleRepository = new FlightScheduleRepository();
         try {
             flightScheduleRepository.saveOrUpdate(
                     flightScheduleServices.getFlightsFromFile(path));
@@ -91,5 +116,14 @@ public class MainPageControllers implements Initializable {
         }
     }
 
+    public void deleteFlight(ActionEvent event) throws IOException {
+        FlightSchedule flightSchedule = tableMainPage.getSelectionModel().getSelectedItem();
+        flightScheduleRepository.delete(flightSchedule);
+        ScenesController scenesController = new ScenesController();
+        scenesController.changeSceneToMainPage(event, user);
+    }
 
+    public void onUsersButton(ActionEvent event) throws IOException {
+        scenesController.changeSceneToUsersPage(event, user);
+    }
 }

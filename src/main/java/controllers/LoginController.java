@@ -43,7 +43,7 @@ public class LoginController {
         } else if (!userToValid.get().getPassword().equals(passwordText.getText())){
             signInLabel.setText("Wrong Password");
         } else {
-            scenesController.changeSceneToMainPage(event,Pages.MAIN_PAGE,userToValid.get());
+            scenesController.changeSceneToMainPage(event,userToValid.get());
         }
     }
 

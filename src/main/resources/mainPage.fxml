@@ -6,24 +6,27 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPageControllers">
+<AnchorPane minHeight="500.0" minWidth="750.0" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPageControllers">
    <children>
-      <Button fx:id="deleteMainPage" layoutX="433.0" layoutY="38.0" mnemonicParsing="false" text="Delete" />
-      <Button fx:id="orderMainPage" layoutX="508.0" layoutY="38.0" mnemonicParsing="false" text="Order" />
-      <Button fx:id="myOrdersMainPage" layoutX="37.0" layoutY="14.0" mnemonicParsing="false" text="My Orders" />
-      <Button fx:id="usersMainPage" layoutX="212.0" layoutY="12.0" mnemonicParsing="false" text="Users" />
-      <Button fx:id="planesMainPage" layoutX="275.0" layoutY="12.0" mnemonicParsing="false" text="Planes" />
-      <Button disable="true" layoutX="133.0" layoutY="12.0" mnemonicParsing="false" text="Schedule" />
+      <Button fx:id="deleteMainPage" layoutX="552.0" layoutY="41.0" mnemonicParsing="false" onAction="#deleteFlight" prefHeight="26.0" prefWidth="58.0" text="Delete" />
+      <Button fx:id="orderMainPage" layoutX="625.0" layoutY="41.0" mnemonicParsing="false" onAction="#insertFlightInBucket" prefHeight="26.0" prefWidth="65.0" text="Order" />
+      <Button fx:id="myOrdersMainPage" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" text="My Orders" />
+      <Button fx:id="usersMainPage" layoutX="229.0" layoutY="11.0" mnemonicParsing="false" onAction="#onUsersButton" text="Users" />
+      <Button fx:id="planesMainPage" layoutX="298.0" layoutY="12.0" mnemonicParsing="false" text="Planes" />
+      <Button disable="true" layoutX="138.0" layoutY="12.0" mnemonicParsing="false" text="Schedule" />
       <Label fx:id="nameLabel" layoutX="14.0" layoutY="54.0" prefHeight="18.0" prefWidth="148.0" />
-      <TableView fx:id="tableMainPage" layoutX="37.0" layoutY="77.0" prefHeight="266.0" prefWidth="554.0">
+      <TableView fx:id="tableMainPage" layoutX="15.0" layoutY="77.0" prefHeight="324.0" prefWidth="689.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="43.20001220703125" text="ID" />
-          <TableColumn fx:id="dateColumn" prefWidth="84.0" text="Date" />
-            <TableColumn fx:id="fromColumn" prefWidth="94.39996337890625" text="From" />
-            <TableColumn fx:id="toColumn" prefWidth="107.20001220703125" text="To" />
-            <TableColumn fx:id="planeNumberColumn" prefWidth="104.0" text="Plane Number" />
-            <TableColumn fx:id="companyColumn" prefWidth="120.00006103515625" text="Company" />
+          <TableColumn fx:id="dateColumn" prefWidth="105.60004043579102" text="Date" />
+            <TableColumn fx:id="fromColumn" prefWidth="105.59996032714844" text="From" />
+            <TableColumn fx:id="toColumn" prefWidth="151.20001220703125" text="To" />
+            <TableColumn fx:id="planeNumberColumn" minWidth="0.0" prefWidth="89.5999755859375" text="Plane Number" />
+            <TableColumn fx:id="companyColumn" minWidth="0.0" prefWidth="194.39996337890625" text="Company" />
+            <TableColumn fx:id="checkBox" minWidth="0.0" prefWidth="0.0" />
         </columns>
       </TableView>
+      <Button fx:id="confirmOrder" layoutX="555.0" layoutY="425.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="26.0" prefWidth="112.0" text="Confirm orders" />
+      <Label fx:id="countLabel" layoutX="653.0" layoutY="15.0" prefHeight="18.0" prefWidth="27.0" textFill="#ef0a0a" />
    </children>
 </AnchorPane>

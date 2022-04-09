@@ -27,12 +27,9 @@ public class FlightSchedule {
     private Plane plane;
     private Date flightTime;
 
-    public String getFlightDateToString(){
-        if (flightTime == null){
-            return "";
-        }
+    public String getFlightDateToString() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        return formatter.format(flightTime);
+        return flightTime == null ? "" : formatter.format(flightTime);
     }
 
     @Override
