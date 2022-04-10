@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import repositories.UserRepository;
-import services.UserValidationService;
+import services.validatorServices.UserValidationService;
 
 import java.io.IOException;
 

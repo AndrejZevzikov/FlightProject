@@ -10,10 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import repositories.PlaneRepository;
-import services.PlaneValidationService;
+import services.validatorServices.PlaneValidationService;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -70,7 +69,7 @@ public class PlanesController implements Initializable {
 
     public void deleteSelectedPlane(ActionEvent event) throws IOException {
         planeRepository.delete(planeTable.getSelectionModel().getSelectedItem());
-        scenesController.changeSceneToPlanesPage(event, user);
+        planeTable.refresh();
     }
 
     public void onAddButton(ActionEvent event) throws IOException {
@@ -81,7 +80,7 @@ public class PlanesController implements Initializable {
 
     public void deletePlaneById(ActionEvent event) throws IOException {
         planeRepository.deleteById(Long.parseLong(deleteByIdTextField.getText()));
-        scenesController.changeSceneToPlanesPage(event, user);
+        planeTable.refresh();
     }
 
     public void setUser(User user) {

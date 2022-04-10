@@ -4,7 +4,7 @@
     "locationFrom": "Gomunice",
     "locationTo": "Cikadu",
     "plane": {
-      "id": 2,
+      "id": 1,
       "number": "051",
       "companyName": "Riffpath",
       "capacity": 85
@@ -28,7 +28,7 @@
     "locationFrom": "Gotemba",
     "locationTo": "Boston",
     "plane": {
-      "id": 4,
+      "id": 3,
       "number": "50557",
       "companyName": "Kwilith",
       "capacity": 107
@@ -40,7 +40,7 @@
     "locationFrom": "Teculután",
     "locationTo": "Heemskerk",
     "plane": {
-      "id": 1,
+      "id": 4,
       "number": "54",
       "companyName": "Skiba",
       "capacity": 104

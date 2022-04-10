@@ -1,7 +1,5 @@
 package controllers;
 
-import com.sun.xml.bind.v2.TODO;
-import constants.Pages;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,12 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import repositories.UserRepository;
-import services.UserValidationService;
+import services.validatorServices.UserValidationService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class UsersController implements Initializable {
@@ -67,19 +63,20 @@ public class UsersController implements Initializable {
         usersTable.setItems(users);
     }
 
+
     public void onAddButton(ActionEvent event) throws IOException {
-       if (userValidationService.isUserInputValid(createUserFromInput(),errorLabel)){
-           saveAndRefresh(event);
-       }
+        if (userValidationService.isUserInputValid(createUserFromInput(), errorLabel)) {
+            saveAndRefresh(event);
+        }
     }
 
     public void onScheduleButton(ActionEvent event) throws IOException {
-        scenesController.changeSceneToMainPage(event,user);
+        scenesController.changeSceneToMainPage(event, user);
     }
 
     public void deleteSelectedUser(ActionEvent event) throws IOException {
         userRepository.delete(usersTable.getSelectionModel().getSelectedItem());
-        scenesController.changeSceneToUsersPage(event, user);
+        scenesController.changeSceneToUsersPage(event,user);
     }
 
     public void deleteUserById(ActionEvent event) throws IOException {
@@ -87,7 +84,7 @@ public class UsersController implements Initializable {
         scenesController.changeSceneToUsersPage(event,user);
     }
 
-    private User createUserFromInput(){
+    private User createUserFromInput() {
         return User.builder()
                 .userName(usernameTextFields.getText())
                 .password(passwordTextField.getText())
@@ -97,18 +94,19 @@ public class UsersController implements Initializable {
 
     private void saveAndRefresh(ActionEvent event) throws IOException {
         userRepository.saveOrUpdate(createUserFromInput());
-        scenesController.changeSceneToUsersPage(event, user);
+        scenesController.changeSceneToUsersPage(event,user);
     }
 
     public void setUser(User user) {
         this.user = user;
         userLabel.setText("Hi, " + user.getUserName());
     }
+
     public void onPlanesButton(ActionEvent event) throws IOException {
-        scenesController.changeSceneToPlanesPage(event,user);
+        scenesController.changeSceneToPlanesPage(event, user);
     }
 
     public void onMyOrdersButton(ActionEvent event) throws IOException {
-        scenesController.changeSceneToMyOrdersPage(event,user);
+        scenesController.changeSceneToMyOrdersPage(event, user);
     }
 }

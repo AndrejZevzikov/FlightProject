@@ -2,6 +2,8 @@ package interfaces;
 
 import org.hibernate.Session;
 import utils.HibernateUtils;
+
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface Crud<T> {
@@ -10,7 +12,8 @@ public interface Crud<T> {
 
     T findById(Long id);
 
-    default void saveOrUpdate(T entity){
+    @Transactional
+    default void saveOrUpdate(T entity) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         session.saveOrUpdate(entity);
@@ -18,17 +21,11 @@ public interface Crud<T> {
         session.close();
     }
 
-    default void saveOrUpdate(List<T> entity){
-        entity.forEach(t -> {
-            Session session = HibernateUtils.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.saveOrUpdate(t);
-            session.getTransaction().commit();
-            session.close();
-        });
+    default void saveOrUpdate(List<T> entity) {
+        entity.forEach(this::saveOrUpdate);
     }
 
-    default void delete(T entity){
+    default void delete(T entity) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(entity);
@@ -36,7 +33,7 @@ public interface Crud<T> {
         session.close();
     }
 
-    default void deleteById(Long id){
+    default void deleteById(Long id) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(findById(id));

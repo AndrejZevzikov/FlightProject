@@ -24,4 +24,5 @@ public class FlightOrderRepository implements Crud<FlightOrder> {
         session.close();
         return flight;
     }
+
 }

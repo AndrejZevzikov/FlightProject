@@ -1,9 +1,6 @@
 package controllers;
 
-import entities.FlightOrder;
-import entities.FlightSchedule;
-import entities.Passenger;
-import entities.User;
+import entities.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,6 +49,8 @@ public class MainPageControllers implements Initializable {
     @FXML
     public Button addFlights;
     @FXML
+    public Label errorLabel;
+    @FXML
     private Button myOrdersMainPage;
     @FXML
     private Button usersMainPage;
@@ -62,9 +61,9 @@ public class MainPageControllers implements Initializable {
     @FXML
     private Button orderMainPage;
 
-    protected User user;
+    private User user;
     ObservableList<FlightSchedule> flights;
-    private List<FlightSchedule> buckedFlights = new ArrayList<>();
+    private List<OrderedFlights> buckedFlights = new ArrayList<>();
     private int count;
     private FlightScheduleRepository flightScheduleRepository = new FlightScheduleRepository();
     private ScenesController scenesController = new ScenesController();
@@ -88,25 +87,26 @@ public class MainPageControllers implements Initializable {
         nameLabel.setText("Hi, " + user.getUserName());
     }
 
-
-
     public void insertFlightInBucket(ActionEvent event) {
         FlightSchedule orderedFlight = tableMainPage.getSelectionModel().getSelectedItem();
-        orderedFlight.getPassengers().add(new Passenger());
-        buckedFlights.add(orderedFlight);
+        Passenger fakePassenger = Passenger.builder()
+                .fullName("")
+                .build();
+        buckedFlights.add(OrderedFlights.builder().passenger(fakePassenger).flightSchedule(orderedFlight).build());
         count += 1;
         countLabel.setText(String.valueOf(count));
     }
 
     public void confirmOrder(ActionEvent event) {
-        FlightOrder order = FlightOrder.builder()
-                .flights(buckedFlights)
-                .user(user)
-                .build();
+
+        FlightOrder order = new FlightOrder();
+        order.setUser(user);
+        buckedFlights.forEach(orderedFlights -> order.addOrderedFlight(orderedFlights));
         FlightOrderRepository flightOrderRepository = new FlightOrderRepository();
         flightOrderRepository.saveOrUpdate(order);
         count = 0;
         countLabel.setText("");
+        buckedFlights.clear();
     }
 
     public void onAddFlightsBottom(ActionEvent event) throws IOException {

@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -21,7 +22,7 @@ public class ScenesController {
     public void changeSceneByGivenPageNonReg(ActionEvent event, String page) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(page));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
@@ -33,7 +34,7 @@ public class ScenesController {
         MainPageControllers mainPageControllers = loader.getController();
         mainPageControllers.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
@@ -44,7 +45,7 @@ public class ScenesController {
         UsersController usersController = loader.getController();
         usersController.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
@@ -56,7 +57,7 @@ public class ScenesController {
         PlanesController planesController = loader.getController();
         planesController.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
@@ -65,14 +66,14 @@ public class ScenesController {
     public void changeSceneToMyOrdersPage(ActionEvent event, User user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Pages.MY_ORDERS_PAGE));
         root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setResizable(true);
+        stage.setScene(scene);
+
         MyOrdersController myOrdersController = loader.getController();
         myOrdersController.setUser(user);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, stage.getWidth(), stage.getHeight());
-        stage.setScene(scene);
-        stage.setResizable(true);
+        myOrdersController.setUpMyOrdersTable();
         stage.show();
     }
-
-
 }

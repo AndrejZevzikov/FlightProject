@@ -1,4 +1,4 @@
-package services;
+package services.validatorServices;
 
 import entities.User;
 import javafx.scene.control.Label;

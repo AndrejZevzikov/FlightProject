@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
+import static org.hibernate.annotations.CascadeType.*;
 
 @Entity
 @Data
@@ -30,10 +29,6 @@ public class FlightSchedule {
     @JoinColumn(name = "plane_id")
     private Plane plane;
     private Date flightTime;
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-    @JoinTable(name = "flightSchedule_passenger")
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Passenger> passengers = new ArrayList<>();
 
     public String getFlightDateToString() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");

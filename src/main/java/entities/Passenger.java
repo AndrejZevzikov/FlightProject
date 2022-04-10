@@ -21,6 +21,5 @@ public class Passenger {
     private String fullName;
     private String identityNumber;
     private Date DayOfBirth;
-    @ManyToMany(mappedBy = "passengers")
-    private List<FlightSchedule> flights;
+
 }
