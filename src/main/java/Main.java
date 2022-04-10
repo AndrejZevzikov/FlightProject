@@ -1,15 +1,14 @@
 import constants.Pages;
 import entities.FlightOrder;
-import entities.FlightSchedule;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import repositories.FlightOrderRepository;
+import repositories.FlightScheduleRepository;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Main extends Application {
 
@@ -26,11 +25,6 @@ public class Main extends Application {
 
     public static void main(String[] args) throws IOException {
 
-        FlightOrderRepository flightOrderRepository = new FlightOrderRepository();
-        List<FlightOrder> flights = flightOrderRepository.findAll();
-
-
-
-//        launch(args);
+        launch(args);
     }
 }

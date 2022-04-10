@@ -1,8 +1,8 @@
 package controllers;
 
-import constants.Pages;
 import entities.FlightOrder;
 import entities.FlightSchedule;
+import entities.Passenger;
 import entities.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -92,6 +92,7 @@ public class MainPageControllers implements Initializable {
 
     public void insertFlightInBucket(ActionEvent event) {
         FlightSchedule orderedFlight = tableMainPage.getSelectionModel().getSelectedItem();
+        orderedFlight.getPassengers().add(new Passenger());
         buckedFlights.add(orderedFlight);
         count += 1;
         countLabel.setText(String.valueOf(count));

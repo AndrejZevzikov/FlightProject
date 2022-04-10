@@ -12,7 +12,7 @@ public class FlightScheduleRepository implements Crud<FlightSchedule> {
     @Override
     public List<FlightSchedule> findAll() {
         Session session = HibernateUtils.getSessionFactory().openSession();
-        List<FlightSchedule> flightsList = session.createQuery("Select fs from FlightSchedule fs",FlightSchedule.class).getResultList();
+        List<FlightSchedule> flightsList = session.createQuery("Select fs from FlightSchedule fs", FlightSchedule.class).getResultList();
         session.close();
         return flightsList;
     }
