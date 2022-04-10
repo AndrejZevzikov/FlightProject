@@ -12,7 +12,7 @@
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#163a5b" height="200.0" layoutX="417.0" layoutY="211.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="210.0" />
       <Label fx:id="userLabel" layoutX="547.0" layoutY="22.0" prefHeight="18.0" prefWidth="66.0" />
-      <Button layoutX="29.0" layoutY="28.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="MyOrders" />
+      <Button layoutX="29.0" layoutY="28.0" mnemonicParsing="false" onAction="#onMyOrdersButton" prefHeight="26.0" prefWidth="83.0" text="MyOrders" />
       <Button fx:id="scheduleButton" layoutX="148.0" layoutY="29.0" mnemonicParsing="false" onAction="#onScheduleButton" text="Schedule" />
       <Button fx:id="userButton" disable="true" layoutX="236.0" layoutY="29.0" mnemonicParsing="false" text="Users" />
       <Button fx:id="planesButton" layoutX="319.0" layoutY="29.0" mnemonicParsing="false" onAction="#onPlanesButton" text="Planes" />

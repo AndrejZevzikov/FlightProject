@@ -2,8 +2,6 @@ package interfaces;
 
 import org.hibernate.Session;
 import utils.HibernateUtils;
-
-
 import java.util.List;
 
 public interface Crud<T> {

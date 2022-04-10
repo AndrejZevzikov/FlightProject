@@ -24,5 +24,4 @@ public class PassengerRepository implements Crud<Passenger> {
         session.close();
         return passenger;
     }
-
 }

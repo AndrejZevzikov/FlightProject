@@ -12,11 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import repositories.FlightOrderRepository;
 import repositories.FlightScheduleRepository;
 import services.FlightScheduleServices;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -48,13 +50,13 @@ public class MainPageControllers implements Initializable {
     @FXML
     public Label countLabel;
     @FXML
+    public Button addFlights;
+    @FXML
     private Button myOrdersMainPage;
     @FXML
     private Button usersMainPage;
     @FXML
     private Button planesMainPage;
-    @FXML
-    private ListView<String> scheduleList;
     @FXML
     private Button deleteMainPage;
     @FXML
@@ -86,6 +88,8 @@ public class MainPageControllers implements Initializable {
         nameLabel.setText("Hi, " + user.getUserName());
     }
 
+
+
     public void insertFlightInBucket(ActionEvent event) {
         FlightSchedule orderedFlight = tableMainPage.getSelectionModel().getSelectedItem();
         buckedFlights.add(orderedFlight);
@@ -104,7 +108,16 @@ public class MainPageControllers implements Initializable {
         countLabel.setText("");
     }
 
-    public void addFlightsScheduleFromFile(String path) {
+    public void onAddFlightsBottom(ActionEvent event) throws IOException {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Load file");
+        File file = fileChooser.showOpenDialog(addFlights.getScene().getWindow());
+        addFlightsScheduleFromFile(file.getAbsolutePath());
+        scenesController.changeSceneToMainPage(event,user);
+    }
+
+    private void addFlightsScheduleFromFile(String path) {
         FlightScheduleServices flightScheduleServices = new FlightScheduleServices();
         try {
             flightScheduleRepository.saveOrUpdate(
@@ -127,5 +140,9 @@ public class MainPageControllers implements Initializable {
 
     public void onPlanesButton(ActionEvent event) throws IOException {
         scenesController.changeSceneToPlanesPage(event,user);
+    }
+
+    public void onMyOrdersButton(ActionEvent event) throws IOException {
+        scenesController.changeSceneToMyOrdersPage(event,user);
     }
 }

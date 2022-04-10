@@ -24,5 +24,4 @@ public class FlightScheduleRepository implements Crud<FlightSchedule> {
         session.close();
         return flight;
     }
-
 }

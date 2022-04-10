@@ -12,7 +12,7 @@ public class FlightOrderRepository implements Crud<FlightOrder> {
     @Override
     public List<FlightOrder> findAll() {
         Session session = HibernateUtils.getSessionFactory().openSession();
-        List<FlightOrder> flightList = session.createQuery("Select fo from flightOrder fo",FlightOrder.class).getResultList();
+        List<FlightOrder> flightList = session.createQuery("Select fo from FlightOrder fo",FlightOrder.class).getResultList();
         session.close();
         return flightList;
     }
@@ -24,5 +24,4 @@ public class FlightOrderRepository implements Crud<FlightOrder> {
         session.close();
         return flight;
     }
-
 }

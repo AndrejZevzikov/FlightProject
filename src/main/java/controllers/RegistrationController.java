@@ -43,7 +43,6 @@ public class RegistrationController {
                 .build();
     }
 
-
     private void saveAndLogin(ActionEvent event) throws IOException {
         userRepository.saveOrUpdate(
                 User.builder()

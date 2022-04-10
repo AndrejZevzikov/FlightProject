@@ -107,4 +107,8 @@ public class UsersController implements Initializable {
     public void onPlanesButton(ActionEvent event) throws IOException {
         scenesController.changeSceneToPlanesPage(event,user);
     }
+
+    public void onMyOrdersButton(ActionEvent event) throws IOException {
+        scenesController.changeSceneToMyOrdersPage(event,user);
+    }
 }

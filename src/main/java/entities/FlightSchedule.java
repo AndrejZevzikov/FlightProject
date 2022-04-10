@@ -1,14 +1,11 @@
 package entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
@@ -30,7 +27,7 @@ public class FlightSchedule {
     private Date flightTime;
 
     public String getFlightDateToString() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         return flightTime == null ? "" : formatter.format(flightTime);
     }
 
@@ -39,4 +36,5 @@ public class FlightSchedule {
         return "Id: " + getId() + " From: " + getLocationFrom() + " To: " + getLocationTo()
                 + " Time: " + getFlightTime() + " Plane number " + getPlane().getNumber();
     }
+
 }

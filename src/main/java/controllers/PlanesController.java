@@ -107,8 +107,9 @@ public class PlanesController implements Initializable {
     private void saveAndRefresh(ActionEvent event) throws IOException {
         planeRepository.saveOrUpdate(createPlaneFromInput());
         scenesController.changeSceneToPlanesPage(event,user);
-
     }
 
-
+    public void onMyOrdersButton(ActionEvent event) throws IOException {
+        scenesController.changeSceneToMyOrdersPage(event,user);
+    }
 }

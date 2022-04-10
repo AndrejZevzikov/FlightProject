@@ -1,17 +1,15 @@
-
 import constants.Pages;
-import entities.User;
+import entities.FlightOrder;
+import entities.FlightSchedule;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import repositories.UserRepository;
+import repositories.FlightOrderRepository;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class Main extends Application {
 
@@ -24,22 +22,15 @@ public class Main extends Application {
         primaryStage.sizeToScene();
         primaryStage.setResizable(true);
         primaryStage.show();
-
     }
-
 
     public static void main(String[] args) throws IOException {
 
-        launch(args);
+        FlightOrderRepository flightOrderRepository = new FlightOrderRepository();
+        List<FlightOrder> flights = flightOrderRepository.findAll();
 
-        UserRepository userRepository = new UserRepository();
 
-        User user1 = User.builder().build();
-        User user2 = User.builder().build();
-        List<User> users = new ArrayList<>();
-        users.add(user1);
-        users.add(user2);
-        userRepository.saveOrUpdate(users);
 
+//        launch(args);
     }
 }

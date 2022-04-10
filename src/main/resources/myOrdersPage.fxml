@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MyOrdersController">
+   <children>
+      <Button disable="true" layoutX="38.0" layoutY="23.0" mnemonicParsing="false" text="My Orders" />
+      <Button fx:id="scheduleButton" layoutX="131.0" layoutY="23.0" mnemonicParsing="false" onAction="#onScheduleButton" text="Schedule" />
+      <Button fx:id="usersButton" layoutX="210.0" layoutY="23.0" mnemonicParsing="false" onAction="#onUsersButton" text="Users" />
+      <Button fx:id="planesButton" layoutX="275.0" layoutY="23.0" mnemonicParsing="false" onAction="#onPlanesButton" text="Planes" />
+      <TableView fx:id="muOrderTable" layoutX="31.0" layoutY="78.0" prefHeight="135.0" prefWidth="489.0">
+        <columns>
+          <TableColumn fx:id="userIdColumn" prefWidth="57.60003662109375" text="User Id" />
+          <TableColumn fx:id="fromColumn" prefWidth="92.79998779296875" text="From" />
+            <TableColumn fx:id="toColumn" prefWidth="105.5999755859375" text="To" />
+            <TableColumn fx:id="dateColumn" prefWidth="81.60003662109375" text="Date" />
+            <TableColumn fx:id="passengerColumn" prefWidth="83.199951171875" text="Passanger" />
+            <TableColumn prefWidth="66.39998779296877" text="Order ID" />
+        </columns>
+      </TableView>
+      <TextField fx:id="insertFullNameTextField" layoutX="35.0" layoutY="235.0" promptText="insert Full Name" />
+      <TextField fx:id="insertIdentityNumberTextField" layoutX="35.0" layoutY="273.0" promptText="insert identity number" />
+      <TextField fx:id="insertAgeTextField" layoutX="35.0" layoutY="310.0" promptText="insert age" />
+      <Label fx:id="errorLabel" layoutX="398.0" layoutY="27.0" prefHeight="45.0" prefWidth="176.0" textFill="RED">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="addButton" layoutX="64.0" layoutY="346.0" mnemonicParsing="false" text="add or change" />
+      <Button fx:id="removeSelectedOrder" layoutX="300.0" layoutY="235.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="162.0" text="Remove Selectet Order" />
+      <Button fx:id="removeOrderByIdButton" layoutX="300.0" layoutY="273.0" mnemonicParsing="false" text="Remove Order ById" />
+      <TextField fx:id="removeIdTextField" layoutX="439.0" layoutY="273.0" prefHeight="26.0" prefWidth="27.0" promptText="ID" />
+   </children>
+</AnchorPane>

@@ -61,4 +61,18 @@ public class ScenesController {
         stage.setResizable(true);
         stage.show();
     }
+
+    public void changeSceneToMyOrdersPage(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Pages.MY_ORDERS_PAGE));
+        root = loader.load();
+        MyOrdersController myOrdersController = loader.getController();
+        myOrdersController.setUser(user);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.show();
+    }
+
+
 }

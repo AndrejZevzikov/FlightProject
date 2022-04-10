@@ -24,5 +24,4 @@ public class PlaneRepository implements Crud<Plane> {
         session.close();
         return plane;
     }
-
 }
