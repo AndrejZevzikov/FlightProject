@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 
 import static org.hibernate.annotations.CascadeType.*;
@@ -15,17 +14,21 @@ import static org.hibernate.annotations.CascadeType.*;
 @NoArgsConstructor
 @Data
 @Builder
-public class OrderedFlights {
+public class Ticket {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToOne(fetch = FetchType.EAGER)
-    private FlightSchedule flightSchedule;
+    private Flight flight;
+
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @Cascade(SAVE_UPDATE)
     private Passenger passenger;
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id",referencedColumnName = "id")
-    private FlightOrder flightOrder;
 
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id",referencedColumnName = "id")
+    @Cascade(SAVE_UPDATE)
+    private UserOrder userOrder;
 }

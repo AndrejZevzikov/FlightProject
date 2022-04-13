@@ -2,6 +2,7 @@ package controllers;
 
 import entities.Plane;
 import entities.User;
+import interfaces.AuthenticatedPages;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,12 +12,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import repositories.PlaneRepository;
 import services.validatorServices.PlaneValidationService;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PlanesController implements Initializable {
+public class PlanesController implements Initializable, AuthenticatedPages {
 
     @FXML
     public Label errorLabel;
@@ -50,16 +50,17 @@ public class PlanesController implements Initializable {
     public TextField insertNumberTextField;
     @FXML
     public Button deleteSelectedPlane;
+    @FXML
+    public Button planesButton;
 
     private ScenesController scenesController = new ScenesController();
     private PlaneRepository planeRepository = new PlaneRepository();
     private PlaneValidationService planeValidationService = new PlaneValidationService();
     private User user;
-    ObservableList<Plane> planes;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        planes = FXCollections.observableArrayList(planeRepository.findAll());
+        ObservableList<Plane> planes = FXCollections.observableArrayList(planeRepository.findAll());
         idColumn.setCellValueFactory(new PropertyValueFactory<Plane, Long>("id"));
         companyNameColumn.setCellValueFactory(new PropertyValueFactory<Plane, String>("companyName"));
         planeNumberColumn.setCellValueFactory(new PropertyValueFactory<Plane, String>("number"));
@@ -88,11 +89,20 @@ public class PlanesController implements Initializable {
     }
 
     public void onScheduleButton(ActionEvent event) throws IOException {
-        scenesController.changeSceneToMainPage(event, user);
+        scenesController.switchSceneToSchedulePage(event, user);
     }
 
     public void onUsersButton(ActionEvent event) throws IOException {
-        scenesController.changeSceneToUsersPage(event, user);
+        scenesController.switchSceneToUsersPage(event, user);
+    }
+
+    @Override
+    public void onPlanesButton(ActionEvent event) {
+        planesButton.setDisable(true);
+    }
+
+    public void onMyOrdersButton(ActionEvent event) throws IOException {
+        scenesController.switchSceneToMyOrdersPage(event,user);
     }
 
     private Plane createPlaneFromInput(){
@@ -105,10 +115,6 @@ public class PlanesController implements Initializable {
 
     private void saveAndRefresh(ActionEvent event) throws IOException {
         planeRepository.saveOrUpdate(createPlaneFromInput());
-        scenesController.changeSceneToPlanesPage(event,user);
-    }
-
-    public void onMyOrdersButton(ActionEvent event) throws IOException {
-        scenesController.changeSceneToMyOrdersPage(event,user);
+        scenesController.switchSceneToPlanesPage(event,user);
     }
 }

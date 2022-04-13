@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegistrationController">
    <children>
-      <Label fx:id="registrationLabel" layoutX="345.0" layoutY="31.0" prefHeight="91.0" prefWidth="253.0" text="Registration" textAlignment="CENTER" textFill="#cc2c2c" textOverrun="CLIP" wrapText="true">
+      <Label fx:id="errorLabel" layoutX="345.0" layoutY="31.0" prefHeight="91.0" prefWidth="253.0" text="Registration" textAlignment="CENTER" textFill="#cc2c2c" textOverrun="CLIP" wrapText="true">
          <font>
             <Font size="19.0" />
          </font>
@@ -19,19 +19,19 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameReg" layoutX="349.0" layoutY="144.0" />
+      <TextField fx:id="usernameForRegistration" layoutX="349.0" layoutY="144.0" prefHeight="26.0" prefWidth="137.0" />
       <Label layoutX="258.0" layoutY="227.0" text="email:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="emailReg" layoutX="348.0" layoutY="228.0" prefHeight="26.0" prefWidth="150.0" />
-      <Button fx:id="confirmReg" layoutX="378.0" layoutY="279.0" mnemonicParsing="false" onAction="#confirmRegistration" text="Confirm" />
+      <TextField fx:id="emailForRegistration" layoutX="348.0" layoutY="228.0" prefHeight="26.0" prefWidth="138.0" />
+      <Button fx:id="confirmRegistrationButton" layoutX="378.0" layoutY="279.0" mnemonicParsing="false" onAction="#confirmRegistration" text="Confirm" />
       <Label layoutX="257.0" layoutY="186.0" text="password:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="passwordReg" layoutX="347.0" layoutY="187.0" prefHeight="26.0" prefWidth="150.0" />
+      <TextField fx:id="passwordForRegistration" layoutX="347.0" layoutY="187.0" prefHeight="26.0" prefWidth="138.0" />
    </children>
 </AnchorPane>

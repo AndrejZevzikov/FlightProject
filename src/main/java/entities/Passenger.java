@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Builder
@@ -21,5 +19,4 @@ public class Passenger {
     private String fullName;
     private String identityNumber;
     private Date DayOfBirth;
-
 }

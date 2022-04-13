@@ -2,22 +2,21 @@ package services;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
-import entities.OrderedFlights;
+import entities.Ticket;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.ref.PhantomReference;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
 
 public class TicketPdfPrinter {
     private Document document = new Document();
-    private OrderedFlights orderedFlights;
+    private Ticket ticket;
 
-    public void createTicketPDF(OrderedFlights orderedFlight) throws IOException, DocumentException, URISyntaxException {
-        this.orderedFlights = orderedFlight;
+    public void createTicketPDF(Ticket ticket) throws IOException, DocumentException, URISyntaxException {
+        this.ticket = ticket;
         PdfWriter.getInstance(document, new FileOutputStream("src\\main\\resources\\ticket.pdf"));
 
         document.open();
@@ -31,12 +30,10 @@ public class TicketPdfPrinter {
         document.add(setUpFlightDetails());
         document.add(setUpThanks());
         document.close();
-
-        System.out.println("nice");
     }
 
-    public File getTicketFile(OrderedFlights ordered) throws DocumentException, IOException, URISyntaxException {
-        createTicketPDF(ordered);
+    public File getTicketFile(Ticket ticket) throws DocumentException, IOException, URISyntaxException {
+        createTicketPDF(ticket);
         return new File("C:\\Users\\andre\\Downloads\\TestFx\\src\\main\\resources\\ticket.pdf");
     }
 
@@ -54,7 +51,7 @@ public class TicketPdfPrinter {
     }
 
     private Image setUpQRCode() throws BadElementException, IOException, URISyntaxException {
-        Image QRCode = Image.getInstance(Paths.get(ClassLoader.getSystemResource("qr_code_barcode.jpg").toURI()).toAbsolutePath().toString());
+        Image QRCode = Image.getInstance(Paths.get(ClassLoader.getSystemResource("images/qr_code_barcode.jpg").toURI()).toAbsolutePath().toString());
         QRCode.scaleToFit(100, 100);
         QRCode.setAbsolutePosition(400, 500);
         return QRCode;
@@ -62,7 +59,7 @@ public class TicketPdfPrinter {
 
     private Image setUpPlaneImage() throws DocumentException, IOException, URISyntaxException {
         Image planeImage = Image.getInstance(Paths.get(
-                ClassLoader.getSystemResource("OIP.jpg").toURI()).toAbsolutePath().toString());
+                ClassLoader.getSystemResource("images/OIP.jpg").toURI()).toAbsolutePath().toString());
         planeImage.scaleToFit(300, 100);
         planeImage.setAbsolutePosition(50, 700);
         return planeImage;
@@ -70,11 +67,11 @@ public class TicketPdfPrinter {
 
     private Paragraph setUpTicketTitle() {
         Paragraph ticketTitle = new Paragraph();
-        Chunk title = new Chunk("Ticket Number: " + orderedFlights.getId(),
+        Chunk title = new Chunk("Ticket Number: " + ticket.getId(),
                 new Font(Font.FontFamily.HELVETICA, 16, 2, BaseColor.BLACK));
         ticketTitle.add(title);
         ticketTitle.setIndentationLeft(170);
-        ticketTitle.setSpacingBefore(90);
+        ticketTitle.setSpacingBefore(80);
         return ticketTitle;
     }
 
@@ -88,13 +85,13 @@ public class TicketPdfPrinter {
     }
 
     private String createFlightInfoString() {
-        return "Departure: " + orderedFlights.getFlightSchedule().getFlightDateToString() + "\n" +
-                "Flight from: " + orderedFlights.getFlightSchedule().getLocationFrom() + "\n" +
-                "Flight to: " + orderedFlights.getFlightSchedule().getLocationTo() + "\n" +
-                "Passenger name: " + orderedFlights.getPassenger().getFullName() + "\n" +
-                "Passenger identity number: " + orderedFlights.getPassenger().getIdentityNumber() + "\n" +
-                "Plane No/Company: " + orderedFlights.getFlightSchedule().getPlane().getNumber() + "/" +
-                orderedFlights.getFlightSchedule().getPlane().getCompanyName();
+        return "Departure: " + ticket.getFlight().getFlightDateToString() + "\n" +
+                "Flight from: " + ticket.getFlight().getLocationFrom() + "\n" +
+                "Flight to: " + ticket.getFlight().getLocationTo() + "\n" +
+                "Passenger name: " + ticket.getPassenger().getFullName() + "\n" +
+                "Passenger identity number: " + ticket.getPassenger().getIdentityNumber() + "\n" +
+                "Plane No/Company: " + ticket.getFlight().getPlane().getNumber() + "/" +
+                ticket.getFlight().getPlane().getCompanyName();
     }
 
     private Paragraph setUpGoogleTitle() {

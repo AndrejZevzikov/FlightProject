@@ -29,10 +29,10 @@ public class HibernateUtils {
                 configuration.setProperties(properties);
 
                 configuration.addAnnotatedClass(User.class);
-                configuration.addAnnotatedClass(FlightSchedule.class);
-                configuration.addAnnotatedClass(FlightOrder.class);
+                configuration.addAnnotatedClass(Flight.class);
+                configuration.addAnnotatedClass(UserOrder.class);
                 configuration.addAnnotatedClass(Passenger.class);
-                configuration.addAnnotatedClass(OrderedFlights.class);
+                configuration.addAnnotatedClass(Ticket.class);
                 configuration.addAnnotatedClass(Plane.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()

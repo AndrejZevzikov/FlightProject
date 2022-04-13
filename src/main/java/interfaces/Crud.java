@@ -2,8 +2,6 @@ package interfaces;
 
 import org.hibernate.Session;
 import utils.HibernateUtils;
-
-import javax.transaction.Transactional;
 import java.util.List;
 
 public interface Crud<T> {
@@ -12,7 +10,6 @@ public interface Crud<T> {
 
     T findById(Long id);
 
-    @Transactional
     default void saveOrUpdate(T entity) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();

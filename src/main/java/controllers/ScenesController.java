@@ -1,16 +1,13 @@
 package controllers;
 
-import constants.Pages;
+import constants.PagesPaths;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-
 import java.io.IOException;
 
 public class ScenesController {
@@ -18,18 +15,25 @@ public class ScenesController {
     private Scene scene;
     private Parent root;
 
-
-    public void changeSceneByGivenPageNonReg(ActionEvent event, String page) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(page));
+    public void switchSceneToLoginPage(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource(PagesPaths.LOGIN));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
 
-    public void changeSceneToMainPage(ActionEvent event, User user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(Pages.MAIN_PAGE));
+    public void switchSceneToRegistrationPage(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource(PagesPaths.REGISTRATION));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    public void switchSceneToSchedulePage(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(PagesPaths.MAIN_PAGE));
         root = loader.load();
         MainPageControllers mainPageControllers = loader.getController();
         mainPageControllers.setUser(user);
@@ -39,8 +43,8 @@ public class ScenesController {
         stage.show();
     }
 
-    public void changeSceneToUsersPage(ActionEvent event, User user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(Pages.USERS_PAGE));
+    public void switchSceneToUsersPage(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(PagesPaths.USERS_PAGE));
         root = loader.load();
         UsersController usersController = loader.getController();
         usersController.setUser(user);
@@ -51,8 +55,8 @@ public class ScenesController {
         stage.show();
     }
 
-    public void changeSceneToPlanesPage(ActionEvent event, User user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(Pages.PLANES_PAGE));
+    public void switchSceneToPlanesPage(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(PagesPaths.PLANES_PAGE));
         root = loader.load();
         PlanesController planesController = loader.getController();
         planesController.setUser(user);
@@ -63,17 +67,16 @@ public class ScenesController {
         stage.show();
     }
 
-    public void changeSceneToMyOrdersPage(ActionEvent event, User user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(Pages.MY_ORDERS_PAGE));
+    public void switchSceneToMyOrdersPage(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(PagesPaths.MY_ORDERS_PAGE));
         root = loader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setResizable(true);
-        stage.setScene(scene);
-
         MyOrdersController myOrdersController = loader.getController();
         myOrdersController.setUser(user);
         myOrdersController.setUpMyOrdersTable();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(true);
         stage.show();
     }
 }

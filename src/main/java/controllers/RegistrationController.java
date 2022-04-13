@@ -1,6 +1,5 @@
 package controllers;
 
-import constants.Pages;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,15 +13,15 @@ import java.io.IOException;
 
 public class RegistrationController {
     @FXML
-    public TextField usernameReg;
+    public TextField usernameForRegistration;
     @FXML
-    public TextField emailReg;
+    public TextField emailForRegistration;
     @FXML
-    public Button confirmReg;
+    public Button confirmRegistrationButton;
     @FXML
-    public TextField passwordReg;
+    public TextField passwordForRegistration;
     @FXML
-    private Label registrationLabel;
+    private Label errorLabel;
 
     private ScenesController scenesController = new ScenesController();
     private UserRepository userRepository = new UserRepository();
@@ -30,27 +29,21 @@ public class RegistrationController {
 
     public void confirmRegistration(ActionEvent event) throws IOException {
 
-       if(userValidationService.isUserInputValid(createUserFromInput(),registrationLabel)) {
+       if(userValidationService.isUserInputValid(createUserFromInput(), errorLabel)) {
            saveAndLogin(event);
        }
     }
 
     private User createUserFromInput(){
         return User.builder()
-                .userName(usernameReg.getText())
-                .password(passwordReg.getText())
-                .email(emailReg.getText())
+                .userName(usernameForRegistration.getText())
+                .password(passwordForRegistration.getText())
+                .email(emailForRegistration.getText())
                 .build();
     }
 
     private void saveAndLogin(ActionEvent event) throws IOException {
-        userRepository.saveOrUpdate(
-                User.builder()
-                        .userName(usernameReg.getText())
-                        .password(passwordReg.getText())
-                        .email(emailReg.getText())
-                        .build());
-
-        scenesController.changeSceneByGivenPageNonReg(event, Pages.LOGIN);
+        userRepository.saveOrUpdate(createUserFromInput());
+        scenesController.switchSceneToLoginPage(event);
     }
 }

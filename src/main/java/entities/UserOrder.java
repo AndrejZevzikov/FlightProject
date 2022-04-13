@@ -3,14 +3,11 @@ package entities;
 import enums.Status;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hibernate.annotations.CascadeType.MERGE;
 import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Entity
@@ -18,7 +15,7 @@ import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FlightOrder {
+public class UserOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,12 +23,12 @@ public class FlightOrder {
     @JoinColumn(name = "user_id")
     private User user;
     private Status status;
-    @OneToMany(mappedBy = "flightOrder",cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private List<OrderedFlights> orderedFlights = new ArrayList<>();
+    @OneToMany(mappedBy = "userOrder",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @Cascade(SAVE_UPDATE)
+    private List<Ticket> tickets = new ArrayList<>();
 
-    public void addOrderedFlight(OrderedFlights orderedFlight){
-        orderedFlight.setFlightOrder(this);
-        orderedFlights.add(orderedFlight); //TODO supaprastinti visur
+    public void addTicket(Ticket ticket){
+        ticket.setUserOrder(this);
+        tickets.add(ticket); //TODO supaprastinti visur
     }
-
 }

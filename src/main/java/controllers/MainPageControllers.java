@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.*;
+import interfaces.AuthenticatedPages;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,10 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
-import repositories.FlightOrderRepository;
-import repositories.FlightScheduleRepository;
-import services.FlightScheduleServices;
-
+import repositories.UserOrderRepository;
+import repositories.FlightRepository;
+import services.FlightServices;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,64 +22,52 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MainPageControllers implements Initializable {
+public class MainPageControllers implements Initializable, AuthenticatedPages {
 
     @FXML
     public Label nameLabel;
     @FXML
-    public TableColumn<FlightSchedule, Long> idColumn;
+    public TableColumn<Flight, Long> idColumn;
     @FXML
-    public TableColumn<FlightSchedule, String> dateColumn;
+    public TableColumn<Flight, String> dateColumn;
     @FXML
-    public TableColumn<FlightSchedule, String> fromColumn;
+    public TableColumn<Flight, String> fromColumn;
     @FXML
-    public TableColumn<FlightSchedule, String> toColumn;
+    public TableColumn<Flight, String> toColumn;
     @FXML
-    public TableColumn<FlightSchedule, String> planeNumberColumn;
+    public TableColumn<Flight, String> planeNumberColumn;
     @FXML
-    public TableColumn<FlightSchedule, String> companyColumn;
+    public TableColumn<Flight, String> companyColumn;
     @FXML
-    public TableView<FlightSchedule> tableMainPage;
+    public TableView<Flight> scheduleTable;
     @FXML
-    public TableColumn<FlightSchedule, Boolean> checkBox;
+    public TableColumn<Flight, Boolean> checkBox;
     @FXML
     public Button confirmOrder;
     @FXML
-    public Label countLabel;
+    public Label flightsInCartCounter;
     @FXML
-    public Button addFlights;
+    public Button addFlightsButton;
     @FXML
-    public Label errorLabel;
-    @FXML
-    private Button myOrdersMainPage;
-    @FXML
-    private Button usersMainPage;
-    @FXML
-    private Button planesMainPage;
-    @FXML
-    private Button deleteMainPage;
-    @FXML
-    private Button orderMainPage;
+    public Button scheduleButton;
 
     private User user;
-    ObservableList<FlightSchedule> flights;
-    private List<OrderedFlights> buckedFlights = new ArrayList<>();
-    private int count;
-    private FlightScheduleRepository flightScheduleRepository = new FlightScheduleRepository();
+    private List<Ticket> flightsInCart = new ArrayList<>();
+    private FlightRepository flightRepository = new FlightRepository();
     private ScenesController scenesController = new ScenesController();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        flights = FXCollections.observableArrayList(flightScheduleRepository.findAll());
-        idColumn.setCellValueFactory(new PropertyValueFactory<FlightSchedule, Long>("id"));
-        fromColumn.setCellValueFactory(new PropertyValueFactory<FlightSchedule, String>("locationFrom"));
-        toColumn.setCellValueFactory(new PropertyValueFactory<FlightSchedule, String>("locationTo"));
+        ObservableList<Flight> flights = FXCollections.observableArrayList(flightRepository.findAll());
+        idColumn.setCellValueFactory(new PropertyValueFactory<Flight, Long>("id"));
+        fromColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("locationFrom"));
+        toColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("locationTo"));
         planeNumberColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlane().getNumber()));
         companyColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlane().getCompanyName()));
         dateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFlightDateToString()));
 
-        tableMainPage.setItems(flights);
+        scheduleTable.setItems(flights);
     }
 
     public void setUser(User user) {
@@ -87,63 +75,59 @@ public class MainPageControllers implements Initializable {
         nameLabel.setText("Hi, " + user.getUserName());
     }
 
-    public void insertFlightInBucket(ActionEvent event) {
-        FlightSchedule orderedFlight = tableMainPage.getSelectionModel().getSelectedItem();
-        Passenger fakePassenger = Passenger.builder()
-                .fullName("")
-                .build();
-        buckedFlights.add(OrderedFlights.builder().passenger(fakePassenger).flightSchedule(orderedFlight).build());
-        count += 1;
-        countLabel.setText(String.valueOf(count));
+    public void insertFlightsInCart(ActionEvent event) {
+        Flight selectedFlight = scheduleTable.getSelectionModel().getSelectedItem();
+        Passenger emptyPassenger = Passenger.builder().fullName("").build();
+        flightsInCart.add(Ticket.builder().passenger(emptyPassenger).flight(selectedFlight).build());
+        flightsInCartCounter.setText(String.valueOf(flightsInCart.size()));
     }
 
     public void confirmOrder(ActionEvent event) {
 
-        FlightOrder order = new FlightOrder();
-        order.setUser(user);
-        buckedFlights.forEach(orderedFlights -> order.addOrderedFlight(orderedFlights));
-        FlightOrderRepository flightOrderRepository = new FlightOrderRepository();
-        flightOrderRepository.saveOrUpdate(order);
-        count = 0;
-        countLabel.setText("");
-        buckedFlights.clear();
+        UserOrder order = UserOrder.builder().user(user).build();
+        flightsInCart.forEach(order::addTicket);
+        UserOrderRepository userOrderRepository = new UserOrderRepository();
+        userOrderRepository.saveOrUpdate(order);
+        flightsInCartCounter.setText("");
+        flightsInCart.clear();
     }
 
-    public void onAddFlightsBottom(ActionEvent event) throws IOException {
-
+    public void onAddFlightsButton(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load file");
-        File file = fileChooser.showOpenDialog(addFlights.getScene().getWindow());
-        addFlightsScheduleFromFile(file.getAbsolutePath());
-        scenesController.changeSceneToMainPage(event,user);
+        File file = fileChooser.showOpenDialog(addFlightsButton.getScene().getWindow());
+        addFlightsScheduleFromGivenPath(file.getAbsolutePath());
+        scenesController.switchSceneToSchedulePage(event, user);
     }
 
-    private void addFlightsScheduleFromFile(String path) {
-        FlightScheduleServices flightScheduleServices = new FlightScheduleServices();
+    private void addFlightsScheduleFromGivenPath(String path) {
+        FlightServices flightServices = new FlightServices();
         try {
-            flightScheduleRepository.saveOrUpdate(
-                    flightScheduleServices.getFlightsFromFile(path));
+            flightRepository.saveOrUpdate(flightServices.getFlightsFromFile(path));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteFlight(ActionEvent event) throws IOException {
-        FlightSchedule flightSchedule = tableMainPage.getSelectionModel().getSelectedItem();
-        flightScheduleRepository.delete(flightSchedule);
-        ScenesController scenesController = new ScenesController();
-        scenesController.changeSceneToMainPage(event, user);
+    public void onDeleteFlightButton(ActionEvent event) throws IOException {
+        flightRepository.delete(scheduleTable.getSelectionModel().getSelectedItem());
+        scenesController.switchSceneToSchedulePage(event, user);
     }
 
     public void onUsersButton(ActionEvent event) throws IOException {
-        scenesController.changeSceneToUsersPage(event, user);
+        scenesController.switchSceneToUsersPage(event, user);
     }
 
     public void onPlanesButton(ActionEvent event) throws IOException {
-        scenesController.changeSceneToPlanesPage(event,user);
+        scenesController.switchSceneToPlanesPage(event, user);
+    }
+
+    @Override
+    public void onScheduleButton(ActionEvent event) {
+        scheduleButton.setDisable(true);
     }
 
     public void onMyOrdersButton(ActionEvent event) throws IOException {
-        scenesController.changeSceneToMyOrdersPage(event,user);
+        scenesController.switchSceneToMyOrdersPage(event, user);
     }
 }

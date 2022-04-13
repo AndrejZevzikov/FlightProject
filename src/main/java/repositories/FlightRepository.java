@@ -1,26 +1,25 @@
 package repositories;
 
-import entities.FlightSchedule;
+import entities.Flight;
 import interfaces.Crud;
 import org.hibernate.Session;
 import utils.HibernateUtils;
-
 import java.util.List;
 
-public class FlightScheduleRepository implements Crud<FlightSchedule> {
+public class FlightRepository implements Crud<Flight> {
 
     @Override
-    public List<FlightSchedule> findAll() {
+    public List<Flight> findAll() {
         Session session = HibernateUtils.getSessionFactory().openSession();
-        List<FlightSchedule> flightsList = session.createQuery("Select fs from FlightSchedule fs", FlightSchedule.class).getResultList();
+        List<Flight> flightsList = session.createQuery("Select fs from FlightSchedule fs", Flight.class).getResultList();
         session.close();
         return flightsList;
     }
 
     @Override
-    public FlightSchedule findById(Long id) {
+    public Flight findById(Long id) {
         Session session = HibernateUtils.getSessionFactory().openSession();
-        FlightSchedule flight = session.find(FlightSchedule.class,id);
+        Flight flight = session.find(Flight.class,id);
         session.close();
         return flight;
     }

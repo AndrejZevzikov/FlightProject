@@ -1,9 +1,8 @@
 package services.validatorServices;
 
-import entities.OrderedFlights;
+import entities.Ticket;
 import entities.Passenger;
-import javafx.scene.control.Label;
-import repositories.OrderedFlightsRepository;
+import repositories.TicketRepository;
 import repositories.PassengerRepository;
 
 import java.util.Optional;
@@ -12,17 +11,17 @@ public class PassengerValidatorService {
 
     private PassengerRepository passengerRepository = new PassengerRepository();
 
-    public void addPassengerToFlight(Passenger passenger, OrderedFlights orderedFlight){
-        OrderedFlightsRepository orderedFlightsRepository = new OrderedFlightsRepository();
+    public void addPassengerToFlight(Passenger passengerForValidation, Ticket ticket){
+        TicketRepository ticketRepository = new TicketRepository();
         Optional<Passenger> existingPassengerFromDB = passengerRepository.findAll().stream()
-                .filter(passenger1 -> passenger.getIdentityNumber().equals(passenger1.getIdentityNumber()))
+                .filter(passenger -> passengerForValidation.getIdentityNumber().equals(passenger.getIdentityNumber()))
                 .findFirst();
 
         if (existingPassengerFromDB.isPresent()){
-            orderedFlight.setPassenger(existingPassengerFromDB.get());
+            ticket.setPassenger(existingPassengerFromDB.get());
         } else {
-            orderedFlight.setPassenger(passenger);
+            ticket.setPassenger(passengerForValidation);
         }
-        orderedFlightsRepository.saveOrUpdate(orderedFlight);
+        ticketRepository.saveOrUpdate(ticket);
     }
 }
