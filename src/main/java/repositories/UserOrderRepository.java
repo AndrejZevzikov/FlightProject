@@ -4,7 +4,6 @@ import entities.UserOrder;
 import interfaces.Crud;
 import org.hibernate.Session;
 import utils.HibernateUtils;
-
 import java.util.List;
 
 public class UserOrderRepository implements Crud<UserOrder> {
@@ -12,7 +11,7 @@ public class UserOrderRepository implements Crud<UserOrder> {
     @Override
     public List<UserOrder> findAll() {
         Session session = HibernateUtils.getSessionFactory().openSession();
-        List<UserOrder> flightList = session.createQuery("Select fo from FlightOrder fo", UserOrder.class).getResultList();
+        List<UserOrder> flightList = session.createQuery("Select uo from UserOrder uo", UserOrder.class).getResultList();
         session.close();
         return flightList;
     }
@@ -24,5 +23,4 @@ public class UserOrderRepository implements Crud<UserOrder> {
         session.close();
         return flight;
     }
-
 }

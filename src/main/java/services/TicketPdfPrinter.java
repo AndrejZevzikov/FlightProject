@@ -3,20 +3,32 @@ package services;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import entities.Ticket;
+import exceptions.InvalidTicketPassengerException;
+import exceptions.TicketNotAvailableException;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 
 public class TicketPdfPrinter {
     private Document document = new Document();
     private Ticket ticket;
 
-    public void createTicketPDF(Ticket ticket) throws IOException, DocumentException, URISyntaxException {
-        this.ticket = ticket;
+    public void createTicketPDF(Ticket ticket) throws IOException, DocumentException, URISyntaxException, InvalidTicketPassengerException {
+
+        if (ticket.getPassenger() == null
+                || ticket.getPassenger().getDayOfBirth() == null
+                || ticket.getPassenger().getFullName().equals("")
+                || ticket.getPassenger().getIdentityNumber() == null){
+            throw new InvalidTicketPassengerException("Passenger information is invalid");
+        }
+            this.ticket = ticket;
         PdfWriter.getInstance(document, new FileOutputStream("src\\main\\resources\\ticket.pdf"));
 
         document.open();
@@ -32,7 +44,11 @@ public class TicketPdfPrinter {
         document.close();
     }
 
-    public File getTicketFile(Ticket ticket) throws DocumentException, IOException, URISyntaxException {
+    public File getTicketFile(Ticket ticket) throws DocumentException, IOException, URISyntaxException, TicketNotAvailableException, InvalidTicketPassengerException {
+        if (ticket.getFlight().getFlightTime()
+                .after(Date.from(LocalDate.now().plusDays(7).atStartOfDay(ZoneId.systemDefault()).toInstant()))) {
+            throw new TicketNotAvailableException("Ticket not Available at this time");
+        }
         createTicketPDF(ticket);
         return new File("C:\\Users\\andre\\Downloads\\TestFx\\src\\main\\resources\\ticket.pdf");
     }
@@ -108,8 +124,8 @@ public class TicketPdfPrinter {
         return googleInfoParagraph;
     }
 
-    private Paragraph setUpGoogleLink(){
-        Chunk googleLink = new Chunk("www.google.com", new Font(Font.FontFamily.HELVETICA,12,2,BaseColor.BLUE));
+    private Paragraph setUpGoogleLink() {
+        Chunk googleLink = new Chunk("www.google.com", new Font(Font.FontFamily.HELVETICA, 12, 2, BaseColor.BLUE));
         Paragraph linkParagraph = new Paragraph(googleLink);
         linkParagraph.setIndentationLeft(220);
         linkParagraph.setSpacingBefore(-3);
@@ -130,7 +146,7 @@ public class TicketPdfPrinter {
         return lastParagraph;
     }
 
-    private String createThanksString(){
+    private String createThanksString() {
         return "THANK YOU\n FOR CHOOSING\nGOOGLE FLY!";
     }
 

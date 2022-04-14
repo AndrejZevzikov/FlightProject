@@ -13,7 +13,7 @@
       <Button layoutX="41.0" layoutY="25.0" mnemonicParsing="false" onAction="#onMyOrdersButton" text="MyOrders" />
       <Button fx:id="scheduleButton" layoutX="132.0" layoutY="25.0" mnemonicParsing="false" onAction="#onScheduleButton" text="Schedule" />
       <Button fx:id="usersButton" layoutX="220.0" layoutY="25.0" mnemonicParsing="false" onAction="#onUsersButton" text="Users" />
-      <Button disable="true" layoutX="300.0" layoutY="26.0" mnemonicParsing="false" text="Planes" />
+      <Button fx:id="planesButton" disable="true" layoutX="300.0" layoutY="26.0" mnemonicParsing="false" text="Planes" />
       <TableView fx:id="planeTable" layoutX="41.0" layoutY="86.0" prefHeight="274.0" prefWidth="352.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="29.60003662109375" text="ID" />

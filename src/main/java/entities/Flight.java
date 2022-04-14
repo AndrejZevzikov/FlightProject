@@ -19,7 +19,7 @@ public class Flight {
     private Long id;
     private String locationFrom;
     private String locationTo;
-    private Date flightDateAndTime;
+    private Date flightTime;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @Cascade(SAVE_UPDATE)
     @JoinColumn(name = "plane_id")
@@ -27,12 +27,12 @@ public class Flight {
 
     public String getFlightDateToString() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        return flightDateAndTime == null ? "" : formatter.format(flightDateAndTime);
+        return flightTime == null ? "" : formatter.format(flightTime);
     }
 
     @Override
     public String toString() {
         return "Id: " + getId() + " From: " + getLocationFrom() + " To: " + getLocationTo()
-                + " Time: " + this.getFlightDateAndTime() + " Plane number " + getPlane().getNumber();
+                + " Time: " + this.getFlightTime() + " Plane number " + getPlane().getNumber();
     }
 }

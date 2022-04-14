@@ -31,7 +31,7 @@ public class LoginController {
 
         if (!userFromDB.isPresent()) {
             signInLabel.setText("No such user");
-        } else if (!userFromDB.get().getPassword().equals(passwordText.getText())) {
+        } else if (!userFromDB.get().isPasswordCorrect(passwordText.getText())) {
             signInLabel.setText("Wrong Password");
         } else {
             scenesController.switchSceneToSchedulePage(event, userFromDB.get());

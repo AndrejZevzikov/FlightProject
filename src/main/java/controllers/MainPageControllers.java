@@ -84,7 +84,8 @@ public class MainPageControllers implements Initializable, AuthenticatedPages {
 
     public void confirmOrder(ActionEvent event) {
 
-        UserOrder order = UserOrder.builder().user(user).build();
+        UserOrder order = new UserOrder();
+        order.setUser(user);
         flightsInCart.forEach(order::addTicket);
         UserOrderRepository userOrderRepository = new UserOrderRepository();
         userOrderRepository.saveOrUpdate(order);

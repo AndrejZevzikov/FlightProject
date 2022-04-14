@@ -11,11 +11,11 @@
 
 <AnchorPane prefHeight="468.0" prefWidth="756.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MyOrdersController">
    <children>
-      <Button disable="true" layoutX="38.0" layoutY="23.0" mnemonicParsing="false" text="My Orders" />
+      <Button fx:id="myOrdersButton" disable="true" layoutX="38.0" layoutY="23.0" mnemonicParsing="false" text="My Orders" />
       <Button fx:id="scheduleButton" layoutX="161.0" layoutY="23.0" mnemonicParsing="false" onAction="#onScheduleButton" text="Schedule" />
       <Button fx:id="usersButton" layoutX="270.0" layoutY="23.0" mnemonicParsing="false" onAction="#onUsersButton" text="Users" />
       <Button fx:id="planesButton" layoutX="342.0" layoutY="23.0" mnemonicParsing="false" onAction="#onPlanesButton" text="Planes" />
-      <TableView fx:id="myOrderTable" layoutX="31.0" layoutY="78.0" prefHeight="147.0" prefWidth="672.0">
+      <TableView fx:id="myOrdersTable" layoutX="31.0" layoutY="78.0" prefHeight="147.0" prefWidth="672.0">
         <columns>
           <TableColumn fx:id="userIdColumn" prefWidth="51.20001220703125" text="User Id" />
           <TableColumn fx:id="fromColumn" prefWidth="128.80001068115234" text="From" />
@@ -33,7 +33,7 @@
       <Button fx:id="removeSelectedOrder" layoutX="29.0" layoutY="246.0" mnemonicParsing="false" onAction="#removeSelectedOrder" prefHeight="26.0" prefWidth="123.0" text="Remove Selected Order" />
       <Button fx:id="removeOrderByIdButton" layoutX="29.0" layoutY="286.0" mnemonicParsing="false" onAction="#removeByIdButton" prefHeight="26.0" prefWidth="132.0" text="Remove Order ById" />
       <TextField fx:id="removeIdTextField" layoutX="181.0" layoutY="286.0" prefHeight="26.0" prefWidth="37.0" promptText="ID" />
-      <Button fx:id="printSelectedFile" layoutX="548.0" layoutY="246.0" mnemonicParsing="false" onAction="#printSelectedOrder" text="Print Selected Order" />
+      <Button fx:id="printSelectedFile" layoutX="548.0" layoutY="246.0" mnemonicParsing="false" onAction="#showTicketOfSelectedOrder" text="Print Selected Order" />
       <TextField fx:id="insertFullName" layoutX="316.0" layoutY="246.0" prefHeight="26.0" prefWidth="159.0" promptText="insert full name" />
       <TextField fx:id="insertIdentityNumber" layoutX="316.0" layoutY="285.0" prefHeight="26.0" prefWidth="159.0" promptText="insert identity number" />
       <Button fx:id="addButton" layoutX="372.0" layoutY="363.0" mnemonicParsing="false" onAction="#addPassengerToFlights" text="add" />

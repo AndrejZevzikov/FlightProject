@@ -12,11 +12,11 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="loginBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #DCDCDC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<BorderPane fx:id="loginBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="785.0" style="-fx-background-color: #DCDCDC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <top>
-        <AnchorPane opacity="0.85" prefHeight="400.0" prefWidth="456.0" style="-fx-background-color: #0000CD; -fx-background-radius: 0;" BorderPane.alignment="CENTER">
+        <AnchorPane opacity="0.85" prefHeight="563.0" prefWidth="830.0" style="-fx-background-color: #0000CD; -fx-background-radius: 0;" BorderPane.alignment="CENTER">
             <children>
-                <Label layoutX="155.0" layoutY="152.0" text="Username:">
+                <Label layoutX="201.0" layoutY="235.0" prefHeight="30.0" prefWidth="88.0" text="Username:">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -37,7 +37,7 @@
                   </RadialGradient>
                </textFill>
                 </Label>
-                <Label layoutX="155.0" layoutY="188.0" text="Password:">
+                <Label layoutX="203.0" layoutY="280.0" prefHeight="30.0" prefWidth="83.0" text="Password:">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -58,8 +58,8 @@
                   </LinearGradient>
                </textFill>
                 </Label>
-                <TextField fx:id="usernameText" layoutX="238.0" layoutY="150.0" prefHeight="26.0" prefWidth="163.0" promptText="username" />
-                <Label fx:id="signInLabel" layoutX="281.0" layoutY="102.0" text="Sign In">
+                <TextField fx:id="usernameText" layoutX="292.0" layoutY="237.0" prefHeight="31.0" prefWidth="213.0" promptText="username" />
+                <Label fx:id="signInLabel" layoutX="340.0" layoutY="181.0" prefHeight="35.0" prefWidth="445.0" text="Sign In" textAlignment="CENTER">
                     <font>
                         <Font size="20.0" />
                     </font>
@@ -80,8 +80,8 @@
                   </RadialGradient>
                </textFill>
                 </Label>
-                <PasswordField fx:id="passwordText" layoutX="238.0" layoutY="186.0" prefHeight="26.0" prefWidth="164.0" promptText="password" />
-                <Button fx:id="loginButton" layoutX="265.0" layoutY="233.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="93.0" style="-fx-background-color: #35bed9; -fx-border-color: #22ff52; -fx-border-radius: 5; -fx-background-radius: 5;" text="Login">
+                <PasswordField fx:id="passwordText" layoutX="292.0" layoutY="278.0" prefHeight="34.0" prefWidth="213.0" promptText="password" />
+                <Button fx:id="loginButton" layoutX="331.0" layoutY="333.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="124.0" style="-fx-background-color: #35bed9; -fx-border-color: #22ff52; -fx-border-radius: 5; -fx-background-radius: 5;" text="Login">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -101,7 +101,7 @@
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font></Button>
-            <Button fx:id="registrationButton" layoutX="267.0" layoutY="273.0" mnemonicParsing="false" onAction="#registration" prefHeight="23.0" prefWidth="90.0" style="-fx-background-color: #35bed9; -fx-border-color: #22ff52; -fx-background-radius: 5; -fx-border-radius: 5;" text="Register">
+            <Button fx:id="registrationButton" layoutX="332.0" layoutY="386.0" mnemonicParsing="false" onAction="#registration" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: #35bed9; -fx-border-color: #22ff52; -fx-background-radius: 5; -fx-border-radius: 5;" text="Register">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -121,7 +121,7 @@
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font></Button>
-            <Label layoutX="239.0" layoutY="26.0" prefHeight="35.0" prefWidth="161.0" text="Google Fly" textAlignment="CENTER">
+            <Label layoutX="292.0" layoutY="69.0" prefHeight="54.0" prefWidth="239.0" text="Google Fly" textAlignment="CENTER">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -149,7 +149,7 @@
                   </LinearGradient>
                </textFill>
                <font>
-                  <Font name="System Italic" size="26.0" />
+                  <Font name="System Italic" size="40.0" />
                </font>
             </Label>
             </children></AnchorPane>
