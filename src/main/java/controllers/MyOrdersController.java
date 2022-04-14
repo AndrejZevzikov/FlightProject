@@ -2,6 +2,8 @@ package controllers;
 
 import com.itextpdf.text.DocumentException;
 import entities.*;
+import exceptions.InvalidTicketPassengerException;
+import exceptions.TicketNotAvailableException;
 import interfaces.AuthenticatedPages;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -149,8 +151,15 @@ public class MyOrdersController implements Initializable, AuthenticatedPages {
     public void showTicketOfSelectedOrder(ActionEvent event) throws DocumentException, IOException, URISyntaxException {
         TicketPdfPrinter ticketPdfPrinter = new TicketPdfPrinter();
         Desktop desktop = Desktop.getDesktop();
-        File file = ticketPdfPrinter.getTicketFile(myOrdersTable.getSelectionModel().getSelectedItem());
-        desktop.open(file);
+        try {
+            File file = ticketPdfPrinter.getTicketFile(myOrdersTable.getSelectionModel().getSelectedItem());
+            desktop.open(file);
+            errorLabel.setText("All, done!");
+        } catch (TicketNotAvailableException e){
+            errorLabel.setText("To,early, can't print ticket");
+        } catch (InvalidTicketPassengerException e){
+            errorLabel.setText("No Passenger information");
+        }
     }
 
     public void onUsersButton(ActionEvent event) throws IOException {

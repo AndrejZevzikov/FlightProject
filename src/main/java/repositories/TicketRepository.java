@@ -12,7 +12,7 @@ public class TicketRepository implements Crud<Ticket> {
     public List<Ticket> findAll() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         List<Ticket> flightsList =
-                session.createQuery("Select orf from OrderedFlights orf", Ticket.class).getResultList();
+                session.createQuery("Select t from Ticket t", Ticket.class).getResultList();
         session.close();
         return flightsList;
     }
