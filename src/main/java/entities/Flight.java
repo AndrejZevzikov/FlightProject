@@ -1,7 +1,10 @@
 package entities;
 
 import lombok.*;
+import org.hibernate.LockMode;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OptimisticLock;
+
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;

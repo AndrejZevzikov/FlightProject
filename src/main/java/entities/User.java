@@ -61,7 +61,7 @@ public class User {
         try {
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
 
-            PBEKeySpec pbeKeySpec = new PBEKeySpec(passwordChars, saltByte, 1000, 500);
+            PBEKeySpec pbeKeySpec = new PBEKeySpec(passwordChars, saltByte, 1000, 100);
             SecretKey secretKey = secretKeyFactory.generateSecret(pbeKeySpec);
             hashedBytes = secretKey.getEncoded();
 

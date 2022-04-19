@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import repositories.PlaneRepository;
 import services.validatorServices.PlaneValidationService;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -74,7 +75,7 @@ public class PlanesController implements Initializable, AuthenticatedPages {
     }
 
     public void onAddButton(ActionEvent event) throws IOException {
-        if (planeValidationService.isPlaneValid(createPlaneFromInput(),errorLabel)){
+        if (planeValidationService.isPlaneValid(createPlaneFromInput(), errorLabel)) {
             saveAndRefresh(event);
         }
     }
@@ -102,10 +103,15 @@ public class PlanesController implements Initializable, AuthenticatedPages {
     }
 
     public void onMyOrdersButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToMyOrdersPage(event,user);
+        scenesController.switchSceneToMyOrdersPage(event, user);
     }
 
-    private Plane createPlaneFromInput(){
+    @Override
+    public void onLogoutButton(ActionEvent event) throws IOException {
+        scenesController.switchSceneToLoginPage(event);
+    }
+
+    private Plane createPlaneFromInput() {
         return Plane.builder()
                 .companyName(insertCompanyTextField.getText())
                 .capacity(Integer.parseInt(insertCapacityTextField.getText()))
@@ -115,6 +121,6 @@ public class PlanesController implements Initializable, AuthenticatedPages {
 
     private void saveAndRefresh(ActionEvent event) throws IOException {
         planeRepository.saveOrUpdate(createPlaneFromInput());
-        scenesController.switchSceneToPlanesPage(event,user);
+        scenesController.switchSceneToPlanesPage(event, user);
     }
 }

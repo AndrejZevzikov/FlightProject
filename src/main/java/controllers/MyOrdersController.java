@@ -16,9 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import repositories.UserOrderRepository;
 import repositories.TicketRepository;
-import services.TicketPdfPrinter;
+import services.fileCreatingService.TicketPdfPrinter;
 import services.validatorServices.PassengerValidatorService;
 
 import java.awt.*;
@@ -79,7 +78,6 @@ public class MyOrdersController implements Initializable, AuthenticatedPages {
 
     private User user;
     private ScenesController scenesController = new ScenesController();
-    private UserOrderRepository userOrderRepository = new UserOrderRepository();
     private TicketRepository ticketRepository = new TicketRepository();
 
     @Override
@@ -127,8 +125,6 @@ public class MyOrdersController implements Initializable, AuthenticatedPages {
             PassengerValidatorService passengerValidatorService = new PassengerValidatorService();
             passengerValidatorService.addPassengerToFlight(passengerToAdd, myOrdersTable.getSelectionModel().getSelectedItem());
             scenesController.switchSceneToMyOrdersPage(event, user);
-            insertFullName.clear();
-            insertIdentityNumber.clear();
         }
     }
 
@@ -148,7 +144,7 @@ public class MyOrdersController implements Initializable, AuthenticatedPages {
         return Date.from(localDate.atStartOfDay(zoneId).toInstant());
     }
 
-    public void showTicketOfSelectedOrder(ActionEvent event) throws DocumentException, IOException, URISyntaxException {
+    public void printTicketOfSelectedOrder(ActionEvent event) throws DocumentException, IOException, URISyntaxException {
         TicketPdfPrinter ticketPdfPrinter = new TicketPdfPrinter();
         Desktop desktop = Desktop.getDesktop();
         try {
@@ -177,5 +173,10 @@ public class MyOrdersController implements Initializable, AuthenticatedPages {
     @Override
     public void onMyOrdersButton(ActionEvent event) {
         myOrdersButton.setDisable(true);
+    }
+
+    @Override
+    public void onLogoutButton(ActionEvent event) throws IOException {
+        scenesController.switchSceneToLoginPage(event);
     }
 }

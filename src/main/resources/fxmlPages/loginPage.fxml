@@ -14,11 +14,11 @@
 
 <BorderPane fx:id="loginBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="785.0" style="-fx-background-color: #DCDCDC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <top>
-        <AnchorPane opacity="0.85" prefHeight="563.0" prefWidth="830.0" style="-fx-background-color: #0000CD; -fx-background-radius: 0;" BorderPane.alignment="CENTER">
+        <AnchorPane opacity="0.85" prefHeight="545.0" prefWidth="784.0" style="-fx-background-color: #0000CD; -fx-background-radius: 0;" BorderPane.alignment="CENTER">
             <children>
-                <Label layoutX="201.0" layoutY="235.0" prefHeight="30.0" prefWidth="88.0" text="Username:">
+                <Label layoutX="201.0" layoutY="203.0" prefHeight="30.0" prefWidth="88.0" text="Username:">
                     <font>
-                        <Font size="14.0" />
+                        <Font size="16.0" />
                     </font>
                <textFill>
                   <RadialGradient centerX="0.30176211453744495" centerY="0.5" radius="0.5">
@@ -37,9 +37,9 @@
                   </RadialGradient>
                </textFill>
                 </Label>
-                <Label layoutX="203.0" layoutY="280.0" prefHeight="30.0" prefWidth="83.0" text="Password:">
+                <Label layoutX="203.0" layoutY="248.0" prefHeight="30.0" prefWidth="83.0" text="Password:">
                     <font>
-                        <Font size="14.0" />
+                        <Font size="16.0" />
                     </font>
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
@@ -58,8 +58,8 @@
                   </LinearGradient>
                </textFill>
                 </Label>
-                <TextField fx:id="usernameText" layoutX="292.0" layoutY="237.0" prefHeight="31.0" prefWidth="213.0" promptText="username" />
-                <Label fx:id="signInLabel" layoutX="340.0" layoutY="181.0" prefHeight="35.0" prefWidth="445.0" text="Sign In" textAlignment="CENTER">
+                <TextField fx:id="usernameText" layoutX="292.0" layoutY="205.0" prefHeight="31.0" prefWidth="213.0" promptText="username" />
+                <Label fx:id="signInLabel" alignment="CENTER" layoutX="1.0" layoutY="149.0" prefHeight="35.0" prefWidth="785.0" text="Sign In" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                     <font>
                         <Font size="20.0" />
                     </font>
@@ -80,8 +80,8 @@
                   </RadialGradient>
                </textFill>
                 </Label>
-                <PasswordField fx:id="passwordText" layoutX="292.0" layoutY="278.0" prefHeight="34.0" prefWidth="213.0" promptText="password" />
-                <Button fx:id="loginButton" layoutX="331.0" layoutY="333.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="124.0" style="-fx-background-color: #35bed9; -fx-border-color: #22ff52; -fx-border-radius: 5; -fx-background-radius: 5;" text="Login">
+                <PasswordField fx:id="passwordText" layoutX="292.0" layoutY="246.0" prefHeight="34.0" prefWidth="213.0" promptText="password" />
+                <Button fx:id="loginButton" layoutX="341.0" layoutY="301.0" mnemonicParsing="false" onAction="#login" prefHeight="27.0" prefWidth="114.0" style="-fx-background-color: #35bed9; -fx-border-color: #22ff52; -fx-border-radius: 5; -fx-background-radius: 5;" text="Login">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -101,7 +101,7 @@
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font></Button>
-            <Button fx:id="registrationButton" layoutX="332.0" layoutY="386.0" mnemonicParsing="false" onAction="#registration" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: #35bed9; -fx-border-color: #22ff52; -fx-background-radius: 5; -fx-border-radius: 5;" text="Register">
+            <Button fx:id="registrationButton" layoutX="341.0" layoutY="347.0" mnemonicParsing="false" onAction="#registration" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #35bed9; -fx-border-color: #22ff52; -fx-background-radius: 5; -fx-border-radius: 5;" text="Register">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -121,7 +121,7 @@
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font></Button>
-            <Label layoutX="292.0" layoutY="69.0" prefHeight="54.0" prefWidth="239.0" text="Google Fly" textAlignment="CENTER">
+            <Label layoutX="289.0" layoutY="45.0" prefHeight="54.0" prefWidth="239.0" text="Google Fly" textAlignment="CENTER">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -132,17 +132,17 @@
                         </Stop>
                         <Stop offset="0.006729475100942127">
                            <color>
-                              <Color red="1.0" green="0.003703703638166189" blue="0.003703703638166189" />
+                              <Color red="1.0" green="0.003921568859368563" blue="0.003921568859368563" />
                            </color>
                         </Stop>
-                        <Stop offset="0.48048780487804876">
+                        <Stop offset="0.4804878048780487">
                            <color>
-                              <Color red="0.9912055730819702" green="1.0" blue="0.009999999776482582" />
+                              <Color red="0.9921568632125854" green="1.0" blue="0.0117647061124444" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.1259259283542633" green="1.0" blue="0.22790123522281647" />
+                              <Color red="0.125490203499794" green="1.0" blue="0.22745098173618317" />
                            </color>
                         </Stop>
                      </stops>

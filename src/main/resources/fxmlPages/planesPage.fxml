@@ -31,5 +31,6 @@
       <TextField fx:id="insertCapacityTextField" layoutX="438.0" layoutY="289.0" prefHeight="26.0" prefWidth="158.0" promptText="insert capacity" />
       <TextField fx:id="insertNumberTextField" layoutX="438.0" layoutY="204.0" prefHeight="26.0" prefWidth="158.0" promptText="insert number" />
       <Label fx:id="errorLabel" layoutX="446.0" layoutY="25.0" prefHeight="36.0" prefWidth="150.0" textFill="#ec0707" />
+      <Button fx:id="logoutButton" layoutX="495.0" layoutY="25.0" mnemonicParsing="false" onAction="#onLogoutButton" text="Logout" />
    </children>
 </AnchorPane>

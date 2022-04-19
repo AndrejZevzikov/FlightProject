@@ -1,7 +1,11 @@
 package interfaces;
 
+import org.hibernate.LockMode;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import utils.HibernateUtils;
+
+import javax.persistence.LockModeType;
 import java.util.List;
 
 public interface Crud<T> {
@@ -12,9 +16,9 @@ public interface Crud<T> {
 
     default void saveOrUpdate(T entity) {
         Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
+        Transaction transaction = session.beginTransaction();
         session.saveOrUpdate(entity);
-        session.getTransaction().commit();
+        transaction.commit();
         session.close();
     }
 

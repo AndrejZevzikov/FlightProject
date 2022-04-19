@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import repositories.UserRepository;
 import services.validatorServices.UserValidationService;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -76,12 +77,12 @@ public class UsersController implements Initializable, AuthenticatedPages {
 
     public void deleteSelectedUser(ActionEvent event) throws IOException {
         userRepository.delete(usersTable.getSelectionModel().getSelectedItem());
-        scenesController.switchSceneToUsersPage(event,user);
+        scenesController.switchSceneToUsersPage(event, user);
     }
 
     public void deleteUserById(ActionEvent event) throws IOException {
         userRepository.deleteById(Long.parseLong(idTextField.getText()));
-        scenesController.switchSceneToUsersPage(event,user);
+        scenesController.switchSceneToUsersPage(event, user);
     }
 
     private User createUserFromInput() {
@@ -94,7 +95,7 @@ public class UsersController implements Initializable, AuthenticatedPages {
 
     private void saveAndRefresh(ActionEvent event) throws IOException {
         userRepository.saveOrUpdate(createUserFromInput());
-        scenesController.switchSceneToUsersPage(event,user);
+        scenesController.switchSceneToUsersPage(event, user);
     }
 
     public void setUser(User user) {
@@ -113,5 +114,10 @@ public class UsersController implements Initializable, AuthenticatedPages {
 
     public void onMyOrdersButton(ActionEvent event) throws IOException {
         scenesController.switchSceneToMyOrdersPage(event, user);
+    }
+
+    @Override
+    public void onLogoutButton(ActionEvent event) throws IOException {
+        scenesController.switchSceneToLoginPage(event);
     }
 }

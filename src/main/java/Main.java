@@ -1,4 +1,3 @@
-import com.itextpdf.text.DocumentException;
 import constants.PagesPaths;
 import entities.*;
 import javafx.application.Application;
@@ -6,12 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import repositories.PlaneRepository;
 import repositories.UserRepository;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 
 public class Main extends Application {
 
@@ -20,23 +14,17 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource(PagesPaths.LOGIN));
         primaryStage.setTitle("Best Program Ever");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(true);
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
-
-        PlaneRepository planeRepository = new PlaneRepository();
-        planeRepository.saveOrUpdate(new Plane(null,"F546","Wizzair",200));
-        planeRepository.saveOrUpdate(new Plane(null,"T10","Ryanair",100));
-        planeRepository.saveOrUpdate(new Plane(null,"TY8585","Air Baltic",250));
-        planeRepository.saveOrUpdate(new Plane(null,"U87","Turkish Airlines",300));
-        planeRepository.saveOrUpdate(new Plane(null,"F546","KLM",500));
 
         UserRepository userRepository = new UserRepository();
         userRepository.saveOrUpdate(User.builder().userName("as").password("as").email("as").build());
-
     }
 
-    public static void main(String[] args) throws DocumentException, IOException, URISyntaxException {
+    public static void main(String[] args) {
+
         launch(args);
     }
 }

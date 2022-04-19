@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import repositories.UserOrderRepository;
 import repositories.FlightRepository;
-import services.FlightServices;
+import services.fileReaderService.FlightServices;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +50,8 @@ public class MainPageControllers implements Initializable, AuthenticatedPages {
     public Button addFlightsButton;
     @FXML
     public Button scheduleButton;
+    @FXML
+    public Button logoutButton;
 
     private User user;
     private List<Ticket> flightsInCart = new ArrayList<>();
@@ -130,5 +132,10 @@ public class MainPageControllers implements Initializable, AuthenticatedPages {
 
     public void onMyOrdersButton(ActionEvent event) throws IOException {
         scenesController.switchSceneToMyOrdersPage(event, user);
+    }
+
+    @Override
+    public void onLogoutButton(ActionEvent event) throws IOException {
+        scenesController.switchSceneToLoginPage(event);
     }
 }

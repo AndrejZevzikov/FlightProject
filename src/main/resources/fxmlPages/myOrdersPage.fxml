@@ -33,11 +33,12 @@
       <Button fx:id="removeSelectedOrder" layoutX="29.0" layoutY="246.0" mnemonicParsing="false" onAction="#removeSelectedOrder" prefHeight="26.0" prefWidth="123.0" text="Remove Selected Order" />
       <Button fx:id="removeOrderByIdButton" layoutX="29.0" layoutY="286.0" mnemonicParsing="false" onAction="#removeByIdButton" prefHeight="26.0" prefWidth="132.0" text="Remove Order ById" />
       <TextField fx:id="removeIdTextField" layoutX="181.0" layoutY="286.0" prefHeight="26.0" prefWidth="37.0" promptText="ID" />
-      <Button fx:id="printSelectedFile" layoutX="548.0" layoutY="246.0" mnemonicParsing="false" onAction="#showTicketOfSelectedOrder" text="Print Selected Order" />
+      <Button fx:id="printSelectedFile" layoutX="548.0" layoutY="246.0" mnemonicParsing="false" onAction="#printTicketOfSelectedOrder" text="Print Selected Order" />
       <TextField fx:id="insertFullName" layoutX="316.0" layoutY="246.0" prefHeight="26.0" prefWidth="159.0" promptText="insert full name" />
       <TextField fx:id="insertIdentityNumber" layoutX="316.0" layoutY="285.0" prefHeight="26.0" prefWidth="159.0" promptText="insert identity number" />
       <Button fx:id="addButton" layoutX="372.0" layoutY="363.0" mnemonicParsing="false" onAction="#addPassengerToFlights" text="add" />
       <Label fx:id="userLabel" layoutX="38.0" layoutY="50.0" prefHeight="26.0" prefWidth="72.0" />
       <DatePicker fx:id="dayOfBirth" layoutX="316.0" layoutY="319.0" prefHeight="26.0" prefWidth="159.0" promptText="select date" />
+      <Button fx:id="logoutButton" layoutX="613.0" layoutY="23.0" mnemonicParsing="false" onAction="#onLogoutButton" prefHeight="26.0" prefWidth="78.0" text="Logout" />
    </children>
 </AnchorPane>

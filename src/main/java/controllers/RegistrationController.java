@@ -34,6 +34,10 @@ public class RegistrationController {
        }
     }
 
+    public void onBackToSignInButton(ActionEvent event) throws IOException {
+        scenesController.switchSceneToLoginPage(event);
+    }
+
     private User createUserFromInput(){
         return User.builder()
                 .userName(usernameForRegistration.getText())

@@ -33,13 +33,14 @@ public class ScenesController {
 
 
     public void switchSceneToSchedulePage(ActionEvent event, User user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(PagesPaths.MAIN_PAGE));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(PagesPaths.SCHEDULE_PAGE));
         root = loader.load();
         MainPageControllers mainPageControllers = loader.getController();
         mainPageControllers.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

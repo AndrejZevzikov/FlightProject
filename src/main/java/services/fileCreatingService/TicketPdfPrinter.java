@@ -1,4 +1,4 @@
-package services;
+package services.fileCreatingService;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -83,7 +83,7 @@ public class TicketPdfPrinter {
 
     private Paragraph setUpTicketTitle() {
         Paragraph ticketTitle = new Paragraph();
-        Chunk title = new Chunk("Ticket Number: " + ticket.getId(),
+        Chunk title = new Chunk("Ticket Number: GFLY-" + ticket.getId(),
                 new Font(Font.FontFamily.HELVETICA, 16, 2, BaseColor.BLACK));
         ticketTitle.add(title);
         ticketTitle.setIndentationLeft(170);

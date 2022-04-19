@@ -1,5 +1,6 @@
 package interfaces;
 
+import controllers.ScenesController;
 import entities.User;
 import javafx.event.ActionEvent;
 
@@ -14,6 +15,8 @@ public interface AuthenticatedPages {
     void onScheduleButton(ActionEvent event) throws IOException;
 
     void onMyOrdersButton(ActionEvent event) throws IOException;
+
+    void onLogoutButton(ActionEvent event) throws IOException;
 
     void setUser(User user);
 }
