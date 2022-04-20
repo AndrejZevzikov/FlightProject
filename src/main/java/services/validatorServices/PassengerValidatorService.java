@@ -11,13 +11,13 @@ public class PassengerValidatorService {
 
     private PassengerRepository passengerRepository = new PassengerRepository();
 
-    public void addPassengerToFlight(Passenger passengerForValidation, Ticket ticket){
+    public void addPassengerToFlight(Passenger passengerForValidation, Ticket ticket) {
         TicketRepository ticketRepository = new TicketRepository();
         Optional<Passenger> existingPassengerFromDB = passengerRepository.findAll().stream()
                 .filter(passenger -> passengerForValidation.getIdentityNumber().equals(passenger.getIdentityNumber()))
                 .findFirst();
 
-        if (existingPassengerFromDB.isPresent()){
+        if (existingPassengerFromDB.isPresent()) {
             ticket.setPassenger(existingPassengerFromDB.get());
         } else {
             ticket.setPassenger(passengerForValidation);

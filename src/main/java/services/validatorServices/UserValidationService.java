@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class UserValidationService {
 
-    private UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository = new UserRepository();
 
     public boolean isUserInputValid(User userForValidate, Label errorLabel) {
         List<User> allUsersInDB = userRepository.findAll();
@@ -22,7 +22,9 @@ public class UserValidationService {
                 .filter(user -> user.getEmail().equals(userForValidate.getEmail()))
                 .findAny();
 
-        if (userForValidate.getPassword().isEmpty() || userForValidate.getUserName().isEmpty() || userForValidate.getEmail().isEmpty()) {
+        if (userForValidate.getPassword().isEmpty()
+                || userForValidate.getUserName().isEmpty()
+                || userForValidate.getEmail().isEmpty()) {
             errorLabel.setText("Some fields, empty");
             return false;
         } else if (invalidUsername.isPresent()) {

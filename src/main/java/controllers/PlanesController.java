@@ -2,7 +2,7 @@ package controllers;
 
 import entities.Plane;
 import entities.User;
-import interfaces.AuthenticatedPages;
+import interfaces.AuthenticatedPagesInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,46 +17,34 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PlanesController implements Initializable, AuthenticatedPages {
+public class PlanesController implements Initializable, AuthenticatedPagesInterface {
 
     @FXML
-    public Label errorLabel;
+    private Label errorLabel;
     @FXML
-    public Button scheduleButton;
+    private TableView<Plane> planeTable;
     @FXML
-    public Button usersButton;
+    private TableColumn<Plane, Long> idColumn;
     @FXML
-    public TableView<Plane> planeTable;
+    private TableColumn<Plane, String> companyNameColumn;
     @FXML
-    public TableColumn<Plane, Long> idColumn;
+    private TableColumn<Plane, String> planeNumberColumn;
     @FXML
-    public TableColumn<Plane, String> companyNameColumn;
+    private TableColumn<Plane, Integer> capacityColumn;
     @FXML
-    public TableColumn<Plane, String> planeNumberColumn;
+    private TextField deleteByIdTextField;
     @FXML
-    public TableColumn<Plane, Integer> capacityColumn;
+    private TextField insertCompanyTextField;
     @FXML
-    public Button deleteSelected;
+    private TextField insertCapacityTextField;
     @FXML
-    public Button deleteByIdButton;
+    private TextField insertNumberTextField;
     @FXML
-    public TextField deleteByIdTextField;
-    @FXML
-    public Button addButton;
-    @FXML
-    public TextField insertCompanyTextField;
-    @FXML
-    public TextField insertCapacityTextField;
-    @FXML
-    public TextField insertNumberTextField;
-    @FXML
-    public Button deleteSelectedPlane;
-    @FXML
-    public Button planesButton;
+    private Button planesButton;
 
-    private ScenesController scenesController = new ScenesController();
-    private PlaneRepository planeRepository = new PlaneRepository();
-    private PlaneValidationService planeValidationService = new PlaneValidationService();
+    private final ScenesController scenesController = new ScenesController();
+    private final PlaneRepository planeRepository = new PlaneRepository();
+    private final PlaneValidationService planeValidationService = new PlaneValidationService();
     private User user;
 
     @Override

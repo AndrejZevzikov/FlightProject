@@ -1,16 +1,16 @@
 package repositories;
 
 import entities.Ticket;
-import interfaces.Crud;
+import interfaces.BasicDBOperationsInterface;
 import org.hibernate.Session;
-import utils.HibernateUtils;
+import utils.H2Utils;
 
 import java.util.List;
 
-public class TicketRepository implements Crud<Ticket> {
+public class TicketRepository implements BasicDBOperationsInterface<Ticket> {
     @Override
     public List<Ticket> findAll() {
-        Session session = HibernateUtils.getSessionFactory().openSession();
+        Session session = H2Utils.getSessionFactory().openSession();
         List<Ticket> flightsList =
                 session.createQuery("Select t from Ticket t", Ticket.class).getResultList();
         session.close();
@@ -19,9 +19,9 @@ public class TicketRepository implements Crud<Ticket> {
 
     @Override
     public Ticket findById(Long id) {
-            Session session = HibernateUtils.getSessionFactory().openSession();
-            Ticket flight = session.find(Ticket.class,id);
-            session.close();
-            return flight;
-        }
+        Session session = H2Utils.getSessionFactory().openSession();
+        Ticket flight = session.find(Ticket.class, id);
+        session.close();
+        return flight;
+    }
 }

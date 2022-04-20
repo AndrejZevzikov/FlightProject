@@ -1,7 +1,7 @@
 package controllers;
 
 import entities.*;
-import interfaces.AuthenticatedPages;
+import interfaces.AuthenticatedPagesInterface;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,36 +22,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MainPageControllers implements Initializable, AuthenticatedPages {
+public class MainPageControllers implements Initializable, AuthenticatedPagesInterface {
 
     @FXML
-    public Label nameLabel;
+    private Label nameLabel;
     @FXML
-    public TableColumn<Flight, Long> idColumn;
+    private TableColumn<Flight, Long> idColumn;
     @FXML
-    public TableColumn<Flight, String> dateColumn;
+    private TableColumn<Flight, String> dateColumn;
     @FXML
-    public TableColumn<Flight, String> fromColumn;
+    private TableColumn<Flight, String> fromColumn;
     @FXML
-    public TableColumn<Flight, String> toColumn;
+    private TableColumn<Flight, String> toColumn;
     @FXML
-    public TableColumn<Flight, String> planeNumberColumn;
+    private TableColumn<Flight, String> planeNumberColumn;
     @FXML
-    public TableColumn<Flight, String> companyColumn;
+    private TableColumn<Flight, String> companyColumn;
     @FXML
-    public TableView<Flight> scheduleTable;
+    private TableView<Flight> scheduleTable;
     @FXML
-    public TableColumn<Flight, Boolean> checkBox;
+    private TableColumn<Flight, Boolean> checkBox;
     @FXML
-    public Button confirmOrder;
+    private Button confirmOrder;
     @FXML
-    public Label flightsInCartCounter;
+    private Label flightsInCartCounter;
     @FXML
-    public Button addFlightsButton;
+    private Button addFlightsButton;
     @FXML
-    public Button scheduleButton;
-    @FXML
-    public Button logoutButton;
+    private Button scheduleButton;
 
     private User user;
     private List<Ticket> flightsInCart = new ArrayList<>();

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 import static org.hibernate.annotations.CascadeType.*;
@@ -27,8 +28,8 @@ public class Ticket {
     @Cascade(SAVE_UPDATE)
     private Passenger passenger;
 
-    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id",referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     @Cascade(SAVE_UPDATE)
     private UserOrder userOrder;
 }

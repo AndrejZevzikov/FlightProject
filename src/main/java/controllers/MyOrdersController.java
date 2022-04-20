@@ -4,7 +4,7 @@ import com.itextpdf.text.DocumentException;
 import entities.*;
 import exceptions.InvalidTicketPassengerException;
 import exceptions.TicketNotAvailableException;
-import interfaces.AuthenticatedPages;
+import interfaces.AuthenticatedPagesInterface;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -31,14 +31,8 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MyOrdersController implements Initializable, AuthenticatedPages {
+public class MyOrdersController implements Initializable, AuthenticatedPagesInterface {
 
-    @FXML
-    public Button scheduleButton;
-    @FXML
-    public Button usersButton;
-    @FXML
-    public Button planesButton;
     @FXML
     public Button myOrdersButton;
     @FXML
@@ -56,29 +50,19 @@ public class MyOrdersController implements Initializable, AuthenticatedPages {
     @FXML
     private Label errorLabel;
     @FXML
-    public Button addButton;
+    private TextField removeIdTextField;
     @FXML
-    public Button removeSelectedOrder;
+    private TextField insertFullName;
     @FXML
-    public Button removeOrderByIdButton;
+    private TextField insertIdentityNumber;
     @FXML
-    public TextField removeIdTextField;
+    private TableColumn<Ticket, Long> orderIDColumn;
     @FXML
-    public Button printSelectedFile;
-    @FXML
-    public TextField insertFullName;
-    @FXML
-    public TextField insertIdentityNumber;
-    @FXML
-    public TableColumn<Ticket, Long> orderIDColumn;
-    @FXML
-    public Label userLabel;
-    @FXML
-    public DatePicker dayOfBirth;
+    private DatePicker dayOfBirth;
 
     private User user;
-    private ScenesController scenesController = new ScenesController();
-    private TicketRepository ticketRepository = new TicketRepository();
+    private final ScenesController scenesController = new ScenesController();
+    private final TicketRepository ticketRepository = new TicketRepository();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -128,22 +112,6 @@ public class MyOrdersController implements Initializable, AuthenticatedPages {
         }
     }
 
-    private boolean isValidUserInput() {
-        if (insertFullName.getText().isEmpty()
-                || insertIdentityNumber.getText().isEmpty()
-                || dayOfBirth.getValue() == null
-                || myOrdersTable.getSelectionModel().getSelectedItem() == null) {
-            errorLabel.setText("Fill all values");
-            return false;
-        }
-        return true;
-    }
-
-    private Date convertLocalDateToDateObj(LocalDate localDate) {
-        ZoneId zoneId = ZoneId.systemDefault();
-        return Date.from(localDate.atStartOfDay(zoneId).toInstant());
-    }
-
     public void printTicketOfSelectedOrder(ActionEvent event) throws DocumentException, IOException, URISyntaxException {
         TicketPdfPrinter ticketPdfPrinter = new TicketPdfPrinter();
         Desktop desktop = Desktop.getDesktop();
@@ -151,9 +119,9 @@ public class MyOrdersController implements Initializable, AuthenticatedPages {
             File file = ticketPdfPrinter.getTicketFile(myOrdersTable.getSelectionModel().getSelectedItem());
             desktop.open(file);
             errorLabel.setText("All, done!");
-        } catch (TicketNotAvailableException e){
+        } catch (TicketNotAvailableException e) {
             errorLabel.setText("To,early, can't print ticket");
-        } catch (InvalidTicketPassengerException e){
+        } catch (InvalidTicketPassengerException e) {
             errorLabel.setText("No Passenger information");
         }
     }
@@ -178,5 +146,21 @@ public class MyOrdersController implements Initializable, AuthenticatedPages {
     @Override
     public void onLogoutButton(ActionEvent event) throws IOException {
         scenesController.switchSceneToLoginPage(event);
+    }
+
+    private boolean isValidUserInput() {
+        if (insertFullName.getText().isEmpty()
+                || insertIdentityNumber.getText().isEmpty()
+                || dayOfBirth.getValue() == null
+                || myOrdersTable.getSelectionModel().getSelectedItem() == null) {
+            errorLabel.setText("Fill all values");
+            return false;
+        }
+        return true;
+    }
+
+    private Date convertLocalDateToDateObj(LocalDate localDate) {
+        ZoneId zoneId = ZoneId.systemDefault();
+        return Date.from(localDate.atStartOfDay(zoneId).toInstant());
     }
 }

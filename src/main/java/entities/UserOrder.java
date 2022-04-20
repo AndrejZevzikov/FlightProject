@@ -19,16 +19,16 @@ public class UserOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
     private Status status;
-    @OneToMany(mappedBy = "userOrder",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @Cascade(SAVE_UPDATE)
     private List<Ticket> tickets = new ArrayList<>();
 
-    public void addTicket(Ticket ticket){
+    public void addTicket(Ticket ticket) {
         ticket.setUserOrder(this);
-        tickets.add(ticket); //TODO supaprastinti visur
+        tickets.add(ticket);
     }
 }

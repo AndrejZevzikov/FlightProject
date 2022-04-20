@@ -1,16 +1,17 @@
 package repositories;
 
 import entities.UserOrder;
-import interfaces.Crud;
+import interfaces.BasicDBOperationsInterface;
 import org.hibernate.Session;
-import utils.HibernateUtils;
+import utils.H2Utils;
+
 import java.util.List;
 
-public class UserOrderRepository implements Crud<UserOrder> {
+public class UserOrderRepository implements BasicDBOperationsInterface<UserOrder> {
 
     @Override
     public List<UserOrder> findAll() {
-        Session session = HibernateUtils.getSessionFactory().openSession();
+        Session session = H2Utils.getSessionFactory().openSession();
         List<UserOrder> flightList = session.createQuery("Select uo from UserOrder uo", UserOrder.class).getResultList();
         session.close();
         return flightList;
@@ -18,8 +19,8 @@ public class UserOrderRepository implements Crud<UserOrder> {
 
     @Override
     public UserOrder findById(Long id) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        UserOrder flight =  session.find(UserOrder.class,id);
+        Session session = H2Utils.getSessionFactory().openSession();
+        UserOrder flight = session.find(UserOrder.class, id);
         session.close();
         return flight;
     }

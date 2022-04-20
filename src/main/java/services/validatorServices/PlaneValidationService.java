@@ -1,7 +1,6 @@
 package services.validatorServices;
 
 import entities.Plane;
-import javafx.application.Platform;
 import javafx.scene.control.Label;
 import repositories.PlaneRepository;
 
@@ -21,7 +20,7 @@ public class PlaneValidationService {
             errorLabel.setText("Fill all values");
             return false;
         }
-        if (invalidPlane.isPresent()){
+        if (invalidPlane.isPresent()) {
             errorLabel.setText("Plane already Exists");
             return false;
         }

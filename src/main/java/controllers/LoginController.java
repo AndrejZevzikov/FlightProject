@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import repositories.UserRepository;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +21,8 @@ public class LoginController {
     @FXML
     private PasswordField passwordText;
 
-    private ScenesController scenesController = new ScenesController();
-    private UserRepository userRepository = new UserRepository();
+    private final ScenesController scenesController = new ScenesController();
+    private final UserRepository userRepository = new UserRepository();
 
     public void login(ActionEvent event) throws IOException {
         List<User> users = userRepository.findAll();

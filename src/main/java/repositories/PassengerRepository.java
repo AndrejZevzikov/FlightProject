@@ -1,26 +1,26 @@
 package repositories;
 
 import entities.Passenger;
-import interfaces.Crud;
+import interfaces.BasicDBOperationsInterface;
 import org.hibernate.Session;
-import utils.HibernateUtils;
+import utils.H2Utils;
 
 import java.util.List;
 
-public class PassengerRepository implements Crud<Passenger> {
+public class PassengerRepository implements BasicDBOperationsInterface<Passenger> {
 
     @Override
     public List<Passenger> findAll() {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        List<Passenger> passengerList = session.createQuery("Select p from Passenger p",Passenger.class).getResultList();
+        Session session = H2Utils.getSessionFactory().openSession();
+        List<Passenger> passengerList = session.createQuery("Select p from Passenger p", Passenger.class).getResultList();
         session.close();
         return passengerList;
     }
 
     @Override
     public Passenger findById(Long id) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        Passenger passenger = session.find(Passenger.class,id);
+        Session session = H2Utils.getSessionFactory().openSession();
+        Passenger passenger = session.find(Passenger.class, id);
         session.close();
         return passenger;
     }

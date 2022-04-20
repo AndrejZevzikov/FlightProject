@@ -27,7 +27,7 @@
         </columns>
       </TableView>
       <Button fx:id="confirmOrder" layoutX="649.0" layoutY="425.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="26.0" prefWidth="112.0" text="Confirm orders" />
-      <Label fx:id="flightsInCartCounter" layoutX="705.0" layoutY="15.0" prefHeight="18.0" prefWidth="27.0" textFill="#ef0a0a" />
+      <Label fx:id="flightsInCartCounter" layoutX="624.0" layoutY="15.0" prefHeight="18.0" prefWidth="27.0" textFill="#ef0a0a" />
       <Button fx:id="addFlightsButton" layoutX="24.0" layoutY="413.0" mnemonicParsing="false" onAction="#onAddFlightsButton" text="Add more Flights" />
       <Label fx:id="errorLabel" layoutX="163.0" layoutY="417.0" prefHeight="18.0" prefWidth="148.0" textFill="#fa0f0f" />
       <Button fx:id="logoutButton" layoutX="713.0" layoutY="11.0" mnemonicParsing="false" onAction="#onLogoutButton" prefHeight="26.0" prefWidth="72.0" text="Logout" />

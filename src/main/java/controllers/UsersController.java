@@ -1,7 +1,7 @@
 package controllers;
 
 import entities.User;
-import interfaces.AuthenticatedPages;
+import interfaces.AuthenticatedPagesInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,45 +16,34 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UsersController implements Initializable, AuthenticatedPages {
+public class UsersController implements Initializable, AuthenticatedPagesInterface {
     @FXML
-    public Label userLabel;
+    private Label userLabel;
     @FXML
-    public Button scheduleButton;
+    private Label errorLabel;
     @FXML
-    public Label errorLabel;
+    private TextField idTextField;
     @FXML
-    public TextField idTextField;
+    private TextField emailTextField;
     @FXML
-    public Button deleteSelectionButton;
+    private TextField passwordTextField;
     @FXML
-    public Button addButton;
+    private TextField usernameTextFields;
     @FXML
-    public TextField emailTextField;
+    private TableView<User> usersTable;
     @FXML
-    public TextField passwordTextField;
+    private TableColumn<User, Long> userIdColumn;
     @FXML
-    public TextField usernameTextFields;
+    private TableColumn<User, String> usernameColumn;
     @FXML
-    public Button deleteByIdButton;
+    private TableColumn<User, String> emailColumn;
     @FXML
-    public Button planesButton;
-    @FXML
-    public TableView<User> usersTable;
-    @FXML
-    public TableColumn<User, Long> userIdColumn;
-    @FXML
-    public TableColumn<User, String> usernameColumn;
-    @FXML
-    public TableColumn<User, String> emailColumn;
-    @FXML
-    public Button userButton;
+    private Button userButton;
 
     private User user;
-
-    private UserRepository userRepository = new UserRepository();
-    private ScenesController scenesController = new ScenesController();
-    private UserValidationService userValidationService = new UserValidationService();
+    private final UserRepository userRepository = new UserRepository();
+    private final ScenesController scenesController = new ScenesController();
+    private final UserValidationService userValidationService = new UserValidationService();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -85,19 +74,6 @@ public class UsersController implements Initializable, AuthenticatedPages {
         scenesController.switchSceneToUsersPage(event, user);
     }
 
-    private User createUserFromInput() {
-        return User.builder()
-                .userName(usernameTextFields.getText())
-                .password(passwordTextField.getText())
-                .email(emailTextField.getText())
-                .build();
-    }
-
-    private void saveAndRefresh(ActionEvent event) throws IOException {
-        userRepository.saveOrUpdate(createUserFromInput());
-        scenesController.switchSceneToUsersPage(event, user);
-    }
-
     public void setUser(User user) {
         this.user = user;
         userLabel.setText("Hi, " + user.getUserName());
@@ -119,5 +95,18 @@ public class UsersController implements Initializable, AuthenticatedPages {
     @Override
     public void onLogoutButton(ActionEvent event) throws IOException {
         scenesController.switchSceneToLoginPage(event);
+    }
+
+    private User createUserFromInput() {
+        return User.builder()
+                .userName(usernameTextFields.getText())
+                .password(passwordTextField.getText())
+                .email(emailTextField.getText())
+                .build();
+    }
+
+    private void saveAndRefresh(ActionEvent event) throws IOException {
+        userRepository.saveOrUpdate(createUserFromInput());
+        scenesController.switchSceneToUsersPage(event, user);
     }
 }

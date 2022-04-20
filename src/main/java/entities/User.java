@@ -43,13 +43,13 @@ public class User {
         this.orders = orders;
     }
 
-    public boolean isPasswordCorrect(String password){
-        String passwordForCheck = generateHashedPassword(password);
-        return getPassword().equals(passwordForCheck);
-    }
-
     public void setPassword(String password) {
         this.password = generateHashedPassword(password);
+    }
+
+    public boolean isPasswordCorrect(String password) {
+        String passwordForCheck = generateHashedPassword(password);
+        return getPassword().equals(passwordForCheck);
     }
 
     private String generateHashedPassword(String password) {
@@ -70,5 +70,4 @@ public class User {
         }
         return Hex.encodeHexString(hashedBytes);
     }
-
 }

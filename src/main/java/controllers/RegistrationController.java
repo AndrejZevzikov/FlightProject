@@ -12,33 +12,32 @@ import services.validatorServices.UserValidationService;
 import java.io.IOException;
 
 public class RegistrationController {
+
     @FXML
-    public TextField usernameForRegistration;
+    private TextField usernameForRegistration;
     @FXML
-    public TextField emailForRegistration;
+    private TextField emailForRegistration;
     @FXML
-    public Button confirmRegistrationButton;
-    @FXML
-    public TextField passwordForRegistration;
+    private TextField passwordForRegistration;
     @FXML
     private Label errorLabel;
 
-    private ScenesController scenesController = new ScenesController();
-    private UserRepository userRepository = new UserRepository();
-    private UserValidationService userValidationService = new UserValidationService();
+    private final ScenesController scenesController = new ScenesController();
+    private final UserRepository userRepository = new UserRepository();
+    private final UserValidationService userValidationService = new UserValidationService();
 
     public void confirmRegistration(ActionEvent event) throws IOException {
 
-       if(userValidationService.isUserInputValid(createUserFromInput(), errorLabel)) {
-           saveAndLogin(event);
-       }
+        if (userValidationService.isUserInputValid(createUserFromInput(), errorLabel)) {
+            saveAndLogin(event);
+        }
     }
 
     public void onBackToSignInButton(ActionEvent event) throws IOException {
         scenesController.switchSceneToLoginPage(event);
     }
 
-    private User createUserFromInput(){
+    private User createUserFromInput() {
         return User.builder()
                 .userName(usernameForRegistration.getText())
                 .password(passwordForRegistration.getText())

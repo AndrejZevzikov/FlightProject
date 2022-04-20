@@ -1,12 +1,11 @@
 package interfaces;
 
-import controllers.ScenesController;
 import entities.User;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public interface AuthenticatedPages {
+public interface AuthenticatedPagesInterface {
 
     void onUsersButton(ActionEvent event) throws IOException;
 

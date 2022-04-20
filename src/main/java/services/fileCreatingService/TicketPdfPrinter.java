@@ -15,7 +15,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-
 public class TicketPdfPrinter {
     private Document document = new Document();
     private Ticket ticket;
@@ -25,10 +24,10 @@ public class TicketPdfPrinter {
         if (ticket.getPassenger() == null
                 || ticket.getPassenger().getDayOfBirth() == null
                 || ticket.getPassenger().getFullName().equals("")
-                || ticket.getPassenger().getIdentityNumber() == null){
+                || ticket.getPassenger().getIdentityNumber() == null) {
             throw new InvalidTicketPassengerException("Passenger information is invalid");
         }
-            this.ticket = ticket;
+        this.ticket = ticket;
         PdfWriter.getInstance(document, new FileOutputStream("src\\main\\resources\\ticket.pdf"));
 
         document.open();
@@ -149,5 +148,4 @@ public class TicketPdfPrinter {
     private String createThanksString() {
         return "THANK YOU\n FOR CHOOSING\nGOOGLE FLY!";
     }
-
 }

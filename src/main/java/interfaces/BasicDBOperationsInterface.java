@@ -1,21 +1,19 @@
 package interfaces;
 
-import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import utils.HibernateUtils;
+import utils.H2Utils;
 
-import javax.persistence.LockModeType;
 import java.util.List;
 
-public interface Crud<T> {
+public interface BasicDBOperationsInterface<T> {
 
     List<T> findAll();
 
     T findById(Long id);
 
     default void saveOrUpdate(T entity) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
+        Session session = H2Utils.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.saveOrUpdate(entity);
         transaction.commit();
@@ -27,7 +25,7 @@ public interface Crud<T> {
     }
 
     default void delete(T entity) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
+        Session session = H2Utils.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(entity);
         session.getTransaction().commit();
@@ -35,7 +33,7 @@ public interface Crud<T> {
     }
 
     default void deleteById(Long id) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
+        Session session = H2Utils.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(findById(id));
         session.getTransaction().commit();

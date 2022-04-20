@@ -1,4 +1,3 @@
-import constants.PagesPaths;
 import entities.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,18 +11,18 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource(PagesPaths.LOGIN));
+        Parent root = FXMLLoader.load(getClass().getResource("fxmlPages/loginPage.fxml"));
         primaryStage.setTitle("Best Program Ever");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-
-        UserRepository userRepository = new UserRepository();
-        userRepository.saveOrUpdate(User.builder().userName("as").password("as").email("as").build());
     }
 
     public static void main(String[] args) {
+
+        UserRepository userRepository = new UserRepository();
+        userRepository.saveOrUpdate(User.builder().userName("as").password("as").email("as").build());
 
         launch(args);
     }
