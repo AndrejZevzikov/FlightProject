@@ -3,7 +3,7 @@ package repositories;
 import entities.Passenger;
 import interfaces.BasicDBOperationsInterface;
 import org.hibernate.Session;
-import utils.H2Utils;
+import utils.HibernateH2Utils;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class PassengerRepository implements BasicDBOperationsInterface<Passenger
 
     @Override
     public List<Passenger> findAll() {
-        Session session = H2Utils.getSessionFactory().openSession();
+        Session session = HibernateH2Utils.getSessionFactory().openSession();
         List<Passenger> passengerList = session.createQuery("Select p from Passenger p", Passenger.class).getResultList();
         session.close();
         return passengerList;
@@ -19,7 +19,7 @@ public class PassengerRepository implements BasicDBOperationsInterface<Passenger
 
     @Override
     public Passenger findById(Long id) {
-        Session session = H2Utils.getSessionFactory().openSession();
+        Session session = HibernateH2Utils.getSessionFactory().openSession();
         Passenger passenger = session.find(Passenger.class, id);
         session.close();
         return passenger;

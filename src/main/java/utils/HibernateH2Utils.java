@@ -5,10 +5,11 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
-public class H2Utils {
+public class HibernateH2Utils {
 
-    private static StandardServiceRegistry registry;
+    private static StandardServiceRegistry registry ;
     private static SessionFactory sessionFactory;
 
     public static SessionFactory getSessionFactory() {

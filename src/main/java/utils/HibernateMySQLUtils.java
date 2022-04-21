@@ -9,7 +9,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import java.util.Properties;
 
-public class HibernateUtils {
+public class HibernateMySQLUtils {
     private static SessionFactory sessionFactory;
 
     public static SessionFactory getSessionFactory() {

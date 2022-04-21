@@ -3,14 +3,14 @@ package repositories;
 import entities.Ticket;
 import interfaces.BasicDBOperationsInterface;
 import org.hibernate.Session;
-import utils.H2Utils;
+import utils.HibernateH2Utils;
 
 import java.util.List;
 
 public class TicketRepository implements BasicDBOperationsInterface<Ticket> {
     @Override
     public List<Ticket> findAll() {
-        Session session = H2Utils.getSessionFactory().openSession();
+        Session session = HibernateH2Utils.getSessionFactory().openSession();
         List<Ticket> flightsList =
                 session.createQuery("Select t from Ticket t", Ticket.class).getResultList();
         session.close();
@@ -19,7 +19,7 @@ public class TicketRepository implements BasicDBOperationsInterface<Ticket> {
 
     @Override
     public Ticket findById(Long id) {
-        Session session = H2Utils.getSessionFactory().openSession();
+        Session session = HibernateH2Utils.getSessionFactory().openSession();
         Ticket flight = session.find(Ticket.class, id);
         session.close();
         return flight;

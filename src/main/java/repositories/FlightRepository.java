@@ -5,7 +5,7 @@ import entities.Plane;
 import interfaces.BasicDBOperationsInterface;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import utils.H2Utils;
+import utils.HibernateH2Utils;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +14,7 @@ public class FlightRepository implements BasicDBOperationsInterface<Flight> {
 
     @Override
     public List<Flight> findAll() {
-        Session session = H2Utils.getSessionFactory().openSession();
+        Session session = HibernateH2Utils.getSessionFactory().openSession();
         List<Flight> flightsList = session.createQuery("Select f from Flight f", Flight.class).getResultList();
         session.close();
         return flightsList;
@@ -22,7 +22,7 @@ public class FlightRepository implements BasicDBOperationsInterface<Flight> {
 
     @Override
     public Flight findById(Long id) {
-        Session session = H2Utils.getSessionFactory().openSession();
+        Session session = HibernateH2Utils.getSessionFactory().openSession();
         Flight flight = session.find(Flight.class, id);
         session.close();
         return flight;
@@ -30,7 +30,7 @@ public class FlightRepository implements BasicDBOperationsInterface<Flight> {
 
     @Override
     public void saveOrUpdate(Flight entity) {
-        Session session = H2Utils.getSessionFactory().openSession();
+        Session session = HibernateH2Utils.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.saveOrUpdate(modifyIncorrectPlane(entity));
         transaction.commit();

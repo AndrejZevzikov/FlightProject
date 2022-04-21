@@ -8,29 +8,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="572.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UsersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UsersController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#163a5b" height="200.0" layoutX="475.0" layoutY="211.0" opacity="0.46" stroke="BLACK" strokeType="INSIDE" width="210.0" />
-      <Label fx:id="userLabel" layoutX="547.0" layoutY="22.0" prefHeight="18.0" prefWidth="66.0" />
-      <Button layoutX="29.0" layoutY="28.0" mnemonicParsing="false" onAction="#onMyOrdersButton" prefHeight="26.0" prefWidth="83.0" text="MyOrders" />
-      <Button fx:id="scheduleButton" layoutX="148.0" layoutY="29.0" mnemonicParsing="false" onAction="#onScheduleButton" text="Schedule" />
-      <Button fx:id="userButton" disable="true" layoutX="236.0" layoutY="29.0" mnemonicParsing="false" text="Users" />
-      <Button fx:id="planesButton" layoutX="319.0" layoutY="29.0" mnemonicParsing="false" onAction="#onPlanesButton" text="Planes" />
-      <TableView fx:id="usersTable" layoutX="29.0" layoutY="90.0" prefHeight="320.0" prefWidth="362.0">
+      <Label fx:id="userLabel" layoutX="142.0" layoutY="442.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="142.0" />
+      <Button layoutX="38.0" layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMyOrdersButton" text="MyOrders" />
+      <Button fx:id="scheduleButton" layoutX="148.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onScheduleButton" text="Schedule" />
+      <Button fx:id="userButton" disable="true" layoutX="249.0" layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Users" />
+      <Button fx:id="planesButton" layoutX="333.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onPlanesButton" text="Planes" />
+      <TableView fx:id="usersTable" layoutX="39.0" layoutY="119.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
         <columns>
-          <TableColumn fx:id="userIdColumn" prefWidth="55.19997787475586" text="UserID" />
-          <TableColumn fx:id="usernameColumn" prefWidth="192.8000030517578" text="Username" />
-            <TableColumn fx:id="emailColumn" prefWidth="112.79999389648435" text="email" />
+          <TableColumn fx:id="userIdColumn" prefWidth="67.20001602172852" text="UserID" />
+          <TableColumn fx:id="usernameColumn" prefWidth="233.59996032714844" text="Username" />
+            <TableColumn fx:id="emailColumn" prefWidth="114.4000244140625" text="email" />
         </columns>
       </TableView>
-      <Button fx:id="deleteSelectionButton" layoutX="475.0" layoutY="90.0" mnemonicParsing="false" onAction="#deleteSelectedUser" prefHeight="26.0" prefWidth="210.0" text="Delete Selected User" />
-      <Button fx:id="addButton" layoutX="519.0" layoutY="373.0" mnemonicParsing="false" onAction="#onAddButton" prefHeight="26.0" prefWidth="134.0" text="add" />
-      <TextField fx:id="emailTextField" layoutX="519.0" layoutY="322.0" prefHeight="26.0" prefWidth="134.0" promptText="insert email" />
-      <TextField fx:id="passwordTextField" layoutX="520.0" layoutY="283.0" prefHeight="26.0" prefWidth="134.0" promptText="insert password" />
-      <TextField fx:id="usernameTextFields" layoutX="520.0" layoutY="238.0" prefHeight="26.0" prefWidth="134.0" promptText="insert username" />
-      <Button fx:id="deleteByIdButton" layoutX="475.0" layoutY="143.0" mnemonicParsing="false" onAction="#deleteUserById" prefHeight="26.0" prefWidth="123.0" text="Delete User By ID" />
-      <TextField fx:id="idTextField" layoutX="624.0" layoutY="143.0" prefHeight="26.0" prefWidth="34.0" promptText="ID" />
-      <Label fx:id="errorLabel" layoutX="410.0" layoutY="22.0" prefHeight="38.0" prefWidth="191.0" textFill="#f70505" />
-      <Button fx:id="logoutButton" layoutX="597.0" layoutY="28.0" mnemonicParsing="false" onAction="#onLogoutButton" prefHeight="26.0" prefWidth="83.0" text="Logout" />
+      <Button fx:id="deleteSelectionButton" layoutX="546.0" layoutY="119.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteSelectedUser" text="Delete Selected User" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="239.0" layoutX="535.0" layoutY="235.0" opacity="0.34" stroke="BLACK" strokeType="INSIDE" width="210.0" />
+      <Button fx:id="addButton" layoutX="574.0" layoutY="398.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAddButton" prefHeight="26.0" prefWidth="134.0" text="add" />
+      <TextField fx:id="emailTextField" layoutX="574.0" layoutY="347.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="134.0" promptText="insert email" />
+      <TextField fx:id="passwordTextField" layoutX="575.0" layoutY="308.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="134.0" promptText="insert password" />
+      <TextField fx:id="usernameTextFields" layoutX="575.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="134.0" promptText="insert username" />
+      <Button fx:id="deleteByIdButton" layoutX="546.0" layoutY="165.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteUserById" text="Delete User By ID" />
+      <TextField fx:id="idTextField" layoutX="708.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" promptText="ID" />
+      <Label fx:id="errorLabel" layoutX="457.0" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="191.0" textFill="#f70505" />
+      <Button fx:id="logoutButton" layoutX="723.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onLogoutButton" text="Logout" />
    </children>
 </AnchorPane>

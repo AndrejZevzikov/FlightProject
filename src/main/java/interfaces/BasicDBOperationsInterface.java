@@ -2,7 +2,7 @@ package interfaces;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import utils.H2Utils;
+import utils.HibernateH2Utils;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface BasicDBOperationsInterface<T> {
     T findById(Long id);
 
     default void saveOrUpdate(T entity) {
-        Session session = H2Utils.getSessionFactory().openSession();
+        Session session = HibernateH2Utils.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.saveOrUpdate(entity);
         transaction.commit();
@@ -25,7 +25,7 @@ public interface BasicDBOperationsInterface<T> {
     }
 
     default void delete(T entity) {
-        Session session = H2Utils.getSessionFactory().openSession();
+        Session session = HibernateH2Utils.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(entity);
         session.getTransaction().commit();
@@ -33,7 +33,7 @@ public interface BasicDBOperationsInterface<T> {
     }
 
     default void deleteById(Long id) {
-        Session session = H2Utils.getSessionFactory().openSession();
+        Session session = HibernateH2Utils.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(findById(id));
         session.getTransaction().commit();
