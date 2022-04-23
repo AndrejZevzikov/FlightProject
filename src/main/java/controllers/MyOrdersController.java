@@ -1,10 +1,12 @@
 package controllers;
 
 import com.itextpdf.text.DocumentException;
-import entities.*;
+import constants.PagesPaths;
 import exceptions.InvalidTicketPassengerException;
 import exceptions.TicketNotAvailableException;
-import interfaces.AuthenticatedPagesInterface;
+import entities.Passenger;
+import entities.Ticket;
+import entities.User;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -71,6 +73,7 @@ public class MyOrdersController implements Initializable, AuthenticatedPagesInte
 
     public void setUser(User user) {
         this.user = user;
+        setUpMyOrdersTable();
     }
 
     public void setUpMyOrdersTable() {
@@ -90,12 +93,12 @@ public class MyOrdersController implements Initializable, AuthenticatedPagesInte
 
     public void removeSelectedOrder(ActionEvent event) throws IOException {
         ticketRepository.delete(myOrdersTable.getSelectionModel().getSelectedItem());
-        scenesController.switchSceneToMyOrdersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.MY_ORDERS_PAGE);
     }
 
     public void removeByIdButton(ActionEvent event) throws IOException {
         ticketRepository.deleteById(Long.parseLong(removeIdTextField.getText()));
-        scenesController.switchSceneToMyOrdersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.MY_ORDERS_PAGE);
     }
 
     public void addPassengerToFlights(ActionEvent event) throws IOException {
@@ -108,11 +111,11 @@ public class MyOrdersController implements Initializable, AuthenticatedPagesInte
 
             PassengerValidatorService passengerValidatorService = new PassengerValidatorService();
             passengerValidatorService.addPassengerToFlight(passengerToAdd, myOrdersTable.getSelectionModel().getSelectedItem());
-            scenesController.switchSceneToMyOrdersPage(event, user);
+            scenesController.switchSceneByGivenPath(event, user, PagesPaths.MY_ORDERS_PAGE);
         }
     }
 
-    public void printTicketOfSelectedOrder(ActionEvent event) throws DocumentException, IOException, URISyntaxException {
+    public void printTicketOfSelectedOrder() throws DocumentException, IOException, URISyntaxException {
         TicketPdfPrinter ticketPdfPrinter = new TicketPdfPrinter();
         Desktop desktop = Desktop.getDesktop();
         try {
@@ -127,15 +130,15 @@ public class MyOrdersController implements Initializable, AuthenticatedPagesInte
     }
 
     public void onUsersButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToUsersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.USERS_PAGE);
     }
 
     public void onPlanesButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToPlanesPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.PLANES_PAGE);
     }
 
     public void onScheduleButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToSchedulePage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.SCHEDULE_PAGE);
     }
 
     @Override
@@ -145,7 +148,7 @@ public class MyOrdersController implements Initializable, AuthenticatedPagesInte
 
     @Override
     public void onLogoutButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToLoginPage(event);
+        scenesController.switchSceneByGivenPath(event, PagesPaths.LOGIN);
     }
 
     private boolean isValidUserInput() {

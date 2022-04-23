@@ -1,7 +1,7 @@
 package controllers;
 
+import constants.PagesPaths;
 import entities.*;
-import interfaces.AuthenticatedPagesInterface;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -72,7 +72,6 @@ public class MainPageControllers implements Initializable, AuthenticatedPagesInt
 
     public void setUser(User user) {
         this.user = user;
-        nameLabel.setText("Hi, " + user.getUserName());
     }
 
     public void insertFlightsInCart(ActionEvent event) {
@@ -98,7 +97,7 @@ public class MainPageControllers implements Initializable, AuthenticatedPagesInt
         fileChooser.setTitle("Load file");
         File file = fileChooser.showOpenDialog(addFlightsButton.getScene().getWindow());
         addFlightsScheduleFromGivenPath(file.getAbsolutePath());
-        scenesController.switchSceneToSchedulePage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.SCHEDULE_PAGE);
     }
 
     private void addFlightsScheduleFromGivenPath(String path) {
@@ -112,15 +111,15 @@ public class MainPageControllers implements Initializable, AuthenticatedPagesInt
 
     public void onDeleteFlightButton(ActionEvent event) throws IOException {
         flightRepository.delete(scheduleTable.getSelectionModel().getSelectedItem());
-        scenesController.switchSceneToSchedulePage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.SCHEDULE_PAGE);
     }
 
     public void onUsersButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToUsersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.USERS_PAGE);
     }
 
     public void onPlanesButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToPlanesPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.PLANES_PAGE);
     }
 
     @Override
@@ -129,11 +128,11 @@ public class MainPageControllers implements Initializable, AuthenticatedPagesInt
     }
 
     public void onMyOrdersButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToMyOrdersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.MY_ORDERS_PAGE);
     }
 
     @Override
     public void onLogoutButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToLoginPage(event);
+        scenesController.switchSceneByGivenPath(event, PagesPaths.LOGIN);
     }
 }

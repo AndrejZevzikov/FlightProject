@@ -1,7 +1,6 @@
 package repositories;
 
 import entities.Ticket;
-import interfaces.BasicDBOperationsInterface;
 import org.hibernate.Session;
 import utils.HibernateH2Utils;
 

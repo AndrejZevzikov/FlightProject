@@ -1,11 +1,12 @@
 package controllers;
 
+import constants.PagesPaths;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.springframework.data.domain.Page;
 import repositories.UserRepository;
 import services.validatorServices.UserValidationService;
 
@@ -34,7 +35,7 @@ public class RegistrationController {
     }
 
     public void onBackToSignInButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToLoginPage(event);
+        scenesController.switchSceneByGivenPath(event, PagesPaths.LOGIN);
     }
 
     private User createUserFromInput() {
@@ -47,6 +48,6 @@ public class RegistrationController {
 
     private void saveAndLogin(ActionEvent event) throws IOException {
         userRepository.saveOrUpdate(createUserFromInput());
-        scenesController.switchSceneToLoginPage(event);
+        onBackToSignInButton(event);
     }
 }

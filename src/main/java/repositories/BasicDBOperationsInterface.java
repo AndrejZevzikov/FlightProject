@@ -1,4 +1,4 @@
-package interfaces;
+package repositories;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;

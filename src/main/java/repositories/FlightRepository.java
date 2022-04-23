@@ -2,7 +2,6 @@ package repositories;
 
 import entities.Flight;
 import entities.Plane;
-import interfaces.BasicDBOperationsInterface;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateH2Utils;

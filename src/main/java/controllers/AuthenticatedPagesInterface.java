@@ -1,4 +1,4 @@
-package interfaces;
+package controllers;
 
 import entities.User;
 import javafx.event.ActionEvent;

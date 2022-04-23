@@ -1,10 +1,8 @@
-import entities.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import repositories.UserRepository;
 
 public class Main extends Application {
 
@@ -20,10 +18,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-
-        UserRepository userRepository = new UserRepository();
-        userRepository.saveOrUpdate(User.builder().userName("as").password("as").email("as").build());
-
         launch(args);
     }
 }

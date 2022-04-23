@@ -1,5 +1,6 @@
 package controllers;
 
+import constants.PagesPaths;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,11 +36,11 @@ public class LoginController {
         } else if (!userFromDB.get().isPasswordCorrect(passwordText.getText())) {
             signInLabel.setText("Wrong Password");
         } else {
-            scenesController.switchSceneToSchedulePage(event, userFromDB.get());
+            scenesController.switchSceneByGivenPath(event, userFromDB.get(), PagesPaths.SCHEDULE_PAGE);
         }
     }
 
     public void registration(ActionEvent event) throws IOException {
-        scenesController.switchSceneToRegistrationPage(event);
+        scenesController.switchSceneByGivenPath(event, PagesPaths.REGISTRATION);
     }
 }

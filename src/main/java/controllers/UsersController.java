@@ -1,7 +1,7 @@
 package controllers;
 
+import constants.PagesPaths;
 import entities.User;
-import interfaces.AuthenticatedPagesInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,17 +61,17 @@ public class UsersController implements Initializable, AuthenticatedPagesInterfa
     }
 
     public void onScheduleButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToSchedulePage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.SCHEDULE_PAGE);
     }
 
     public void deleteSelectedUser(ActionEvent event) throws IOException {
         userRepository.delete(usersTable.getSelectionModel().getSelectedItem());
-        scenesController.switchSceneToUsersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.USERS_PAGE);
     }
 
     public void deleteUserById(ActionEvent event) throws IOException {
         userRepository.deleteById(Long.parseLong(idTextField.getText()));
-        scenesController.switchSceneToUsersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.USERS_PAGE);
     }
 
     public void setUser(User user) {
@@ -85,16 +85,16 @@ public class UsersController implements Initializable, AuthenticatedPagesInterfa
     }
 
     public void onPlanesButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToPlanesPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.PLANES_PAGE);
     }
 
     public void onMyOrdersButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToMyOrdersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.MY_ORDERS_PAGE);
     }
 
     @Override
     public void onLogoutButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToLoginPage(event);
+        scenesController.switchSceneByGivenPath(event, PagesPaths.LOGIN);
     }
 
     private User createUserFromInput() {
@@ -107,6 +107,6 @@ public class UsersController implements Initializable, AuthenticatedPagesInterfa
 
     private void saveAndRefresh(ActionEvent event) throws IOException {
         userRepository.saveOrUpdate(createUserFromInput());
-        scenesController.switchSceneToUsersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.USERS_PAGE);
     }
 }

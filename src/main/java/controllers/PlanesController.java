@@ -1,8 +1,8 @@
 package controllers;
 
+import constants.PagesPaths;
 import entities.Plane;
 import entities.User;
-import interfaces.AuthenticatedPagesInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,7 +59,7 @@ public class PlanesController implements Initializable, AuthenticatedPagesInterf
 
     public void deleteSelectedPlane(ActionEvent event) throws IOException {
         planeRepository.delete(planeTable.getSelectionModel().getSelectedItem());
-        planeTable.refresh();
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.PLANES_PAGE);
     }
 
     public void onAddButton(ActionEvent event) throws IOException {
@@ -70,7 +70,7 @@ public class PlanesController implements Initializable, AuthenticatedPagesInterf
 
     public void deletePlaneById(ActionEvent event) throws IOException {
         planeRepository.deleteById(Long.parseLong(deleteByIdTextField.getText()));
-        planeTable.refresh();
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.PLANES_PAGE);
     }
 
     public void setUser(User user) {
@@ -78,11 +78,11 @@ public class PlanesController implements Initializable, AuthenticatedPagesInterf
     }
 
     public void onScheduleButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToSchedulePage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.SCHEDULE_PAGE);
     }
 
     public void onUsersButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToUsersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.USERS_PAGE);
     }
 
     @Override
@@ -91,12 +91,12 @@ public class PlanesController implements Initializable, AuthenticatedPagesInterf
     }
 
     public void onMyOrdersButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToMyOrdersPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.MY_ORDERS_PAGE);
     }
 
     @Override
     public void onLogoutButton(ActionEvent event) throws IOException {
-        scenesController.switchSceneToLoginPage(event);
+        scenesController.switchSceneByGivenPath(event, PagesPaths.LOGIN);
     }
 
     private Plane createPlaneFromInput() {
@@ -109,6 +109,6 @@ public class PlanesController implements Initializable, AuthenticatedPagesInterf
 
     private void saveAndRefresh(ActionEvent event) throws IOException {
         planeRepository.saveOrUpdate(createPlaneFromInput());
-        scenesController.switchSceneToPlanesPage(event, user);
+        scenesController.switchSceneByGivenPath(event, user, PagesPaths.PLANES_PAGE);
     }
 }
