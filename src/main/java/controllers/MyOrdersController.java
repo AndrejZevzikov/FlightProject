@@ -1,9 +1,11 @@
 package controllers;
 
 import com.itextpdf.text.DocumentException;
-import entities.*;
 import exceptions.InvalidTicketPassengerException;
 import exceptions.TicketNotAvailableException;
+import entities.Passenger;
+import entities.Ticket;
+import entities.User;
 import interfaces.AuthenticatedPagesInterface;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

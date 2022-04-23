@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.controllersIntefaces.Controller;
 import entities.Plane;
 import entities.User;
 import interfaces.AuthenticatedPagesInterface;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PlanesController implements Initializable, AuthenticatedPagesInterface {
+public class PlanesController implements Initializable, AuthenticatedPagesInterface, Controller {
 
     @FXML
     private Label errorLabel;

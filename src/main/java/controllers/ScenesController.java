@@ -1,6 +1,7 @@
 package controllers;
 
 import constants.PagesPaths;
+import controllers.controllersIntefaces.Controller;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -60,8 +61,8 @@ public class ScenesController {
     public void switchSceneToPlanesPage(ActionEvent event, User user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(PagesPaths.PLANES_PAGE));
         root = loader.load();
-        PlanesController planesController = loader.getController();
-        planesController.setUser(user);
+        Controller planesController = loader.getController();
+        planesController.setUser(user); //TODO sukurti interface ir panaudoti
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
