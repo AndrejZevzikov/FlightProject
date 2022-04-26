@@ -36,4 +36,5 @@ public class Flight {
         return "Id: " + getId() + " From: " + getLocationFrom() + " To: " + getLocationTo()
                 + " Time: " + this.getFlightTime() + " Plane number " + getPlane().getNumber();
     }
+
 }

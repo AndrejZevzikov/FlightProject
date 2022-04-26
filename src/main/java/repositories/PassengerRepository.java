@@ -14,6 +14,7 @@ public class PassengerRepository implements BasicDBOperationsInterface<Passenger
         List<Passenger> passengerList = session.createQuery("Select p from Passenger p", Passenger.class).getResultList();
         session.close();
         return passengerList;
+
     }
 
     @Override

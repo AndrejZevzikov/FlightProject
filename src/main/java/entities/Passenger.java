@@ -20,4 +20,5 @@ public class Passenger {
     private String fullName;
     private String identityNumber;
     private Date DayOfBirth;
+
 }

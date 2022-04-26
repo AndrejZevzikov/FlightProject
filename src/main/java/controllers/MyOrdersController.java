@@ -68,7 +68,6 @@ public class MyOrdersController implements Initializable, AuthenticatedPagesInte
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
     public void setUser(User user) {

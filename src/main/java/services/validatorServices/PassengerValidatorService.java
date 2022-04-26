@@ -17,6 +17,7 @@ public class PassengerValidatorService {
                 .filter(passenger -> passengerForValidation.getIdentityNumber().equals(passenger.getIdentityNumber()))
                 .findFirst();
 
+
         if (existingPassengerFromDB.isPresent()) {
             ticket.setPassenger(existingPassengerFromDB.get());
         } else {

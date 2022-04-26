@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.springframework.data.domain.Page;
 import repositories.UserRepository;
 import services.validatorServices.UserValidationService;
 

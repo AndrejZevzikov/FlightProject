@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import repositories.PlaneRepository;
 import services.validatorServices.PlaneValidationService;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

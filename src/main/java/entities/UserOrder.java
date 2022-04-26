@@ -30,5 +30,6 @@ public class UserOrder {
     public void addTicket(Ticket ticket) {
         ticket.setUserOrder(this);
         tickets.add(ticket);
+
     }
 }

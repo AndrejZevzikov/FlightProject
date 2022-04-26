@@ -18,6 +18,7 @@ public interface BasicDBOperationsInterface<T> {
         session.saveOrUpdate(entity);
         transaction.commit();
         session.close();
+
     }
 
     default void saveOrUpdate(List<T> entity) {

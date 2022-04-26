@@ -38,6 +38,7 @@ public class LoginController {
         } else {
             scenesController.switchSceneByGivenPath(event, userFromDB.get(), PagesPaths.SCHEDULE_PAGE);
         }
+
     }
 
     public void registration(ActionEvent event) throws IOException {

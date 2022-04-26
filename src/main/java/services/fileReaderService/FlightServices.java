@@ -16,6 +16,7 @@ public class FlightServices {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get(path));
 
+
         return gson.fromJson(reader, new TypeToken<List<Flight>>() {}.getType());
     }
 }

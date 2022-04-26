@@ -16,6 +16,7 @@ public class PlaneValidationService {
                 .filter(plane1 -> plane1.getCompanyName().equals(plane.getCompanyName()))
                 .findAny();
 
+
         if (plane.getNumber().isEmpty() || plane.getCompanyName().isEmpty() || plane.getCapacity() == 0) {
             errorLabel.setText("Fill all values");
             return false;

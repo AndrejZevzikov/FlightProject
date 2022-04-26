@@ -14,6 +14,7 @@ public class UserRepository implements BasicDBOperationsInterface<User> {
         List<User> userList = session.createQuery("Select u from User u", User.class).getResultList();
         session.close();
         return userList;
+
     }
 
     @Override

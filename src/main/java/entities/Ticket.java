@@ -32,4 +32,5 @@ public class Ticket {
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @Cascade(SAVE_UPDATE)
     private UserOrder userOrder;
+
 }

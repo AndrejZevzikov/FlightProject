@@ -29,7 +29,6 @@ public class TicketPdfPrinter {
         }
         this.ticket = ticket;
         PdfWriter.getInstance(document, new FileOutputStream("src\\main\\resources\\ticket.pdf"));
-
         document.open();
         document.add(setUpGoogleTitle());
         document.add(setUpGoogleInfo());

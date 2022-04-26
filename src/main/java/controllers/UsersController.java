@@ -103,6 +103,7 @@ public class UsersController implements Initializable, AuthenticatedPagesInterfa
                 .password(passwordTextField.getText())
                 .email(emailTextField.getText())
                 .build();
+
     }
 
     private void saveAndRefresh(ActionEvent event) throws IOException {

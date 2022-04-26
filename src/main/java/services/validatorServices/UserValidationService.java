@@ -14,6 +14,7 @@ public class UserValidationService {
     public boolean isUserInputValid(User userForValidate, Label errorLabel) {
         List<User> allUsersInDB = userRepository.findAll();
 
+
         Optional<User> invalidUsername = allUsersInDB.stream()
                 .filter(user -> user.getUserName().equals(userForValidate.getUserName()))
                 .findAny();

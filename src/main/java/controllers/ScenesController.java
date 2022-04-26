@@ -1,6 +1,5 @@
 package controllers;
 
-import constants.PagesPaths;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

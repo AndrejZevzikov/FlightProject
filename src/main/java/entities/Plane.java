@@ -20,4 +20,5 @@ public class Plane {
     private String number;
     private String companyName;
     private Integer capacity;
+
 }

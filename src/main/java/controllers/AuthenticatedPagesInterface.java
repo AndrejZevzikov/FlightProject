@@ -2,7 +2,6 @@ package controllers;
 
 import entities.User;
 import javafx.event.ActionEvent;
-
 import java.io.IOException;
 
 public interface AuthenticatedPagesInterface {

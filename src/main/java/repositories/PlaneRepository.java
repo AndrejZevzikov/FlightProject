@@ -14,6 +14,7 @@ public class PlaneRepository implements BasicDBOperationsInterface<Plane> {
         List<Plane> planeList = session.createQuery("Select p from Plane p", Plane.class).getResultList();
         session.close();
         return planeList;
+
     }
 
     @Override

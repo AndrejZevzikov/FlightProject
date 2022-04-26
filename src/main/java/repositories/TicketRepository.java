@@ -14,6 +14,7 @@ public class TicketRepository implements BasicDBOperationsInterface<Ticket> {
                 session.createQuery("Select t from Ticket t", Ticket.class).getResultList();
         session.close();
         return flightsList;
+
     }
 
     @Override
